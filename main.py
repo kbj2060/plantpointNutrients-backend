@@ -1,7 +1,5 @@
-from typing import Optional
-from fastapi import FastAPI
-from pydantic import BaseModel
-
+from controllers.machines import *
+from controllers.sensors import *
 
 #########################
 # 필요한 정보
@@ -19,16 +17,8 @@ from pydantic import BaseModel
 # 센서
 # 1. 유량센서
 # 2. 온도센서
+# 3. 전류센서
 #########################
 
-app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
 
