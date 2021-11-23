@@ -13,3 +13,7 @@ def read_machines_by_name(name: str):
 @app.get("/machines/section:{section}")
 def read_machines_by_section(section: str):
     return mRepo.get_machines(filters={'section__eq': section})
+
+@app.post("/machines/add")
+def create_machines():
+    return mRepo.add_machine()

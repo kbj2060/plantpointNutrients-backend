@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.sqltypes import DateTime
 
 Base = declarative_base()
 
@@ -19,11 +19,11 @@ VALUES(1, 'waterpump', 's1/d1', 'drain', now());
 '''
 class Machine(Base):
     __tablename__ = "machine"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(36), nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(36))
     section = Column(String(36))
     purpose = Column(String(36))
-    created = Column(DateTime)
+    created = Column(DateTime, default=datetime.utcnow)
 
 '''
 CREATE TABLE sensor (
@@ -39,7 +39,7 @@ VALUES(1, 'temperature', 's1/d1', now());
 '''
 class Sensor(Base):
     __tablename__ = "sensor"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(36), nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(36))
     section = Column(String(36))
-    created = Column(DateTime)
+    created = Column(DateTime, default=datetime.utcnow)
