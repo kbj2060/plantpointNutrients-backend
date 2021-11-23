@@ -8,10 +8,11 @@ from typing import  Optional, Dict
 
     
 class Machine:
-    def __init__(self, name: str, section: str,  purpose: Optional[str]= None):
+    def __init__(self, name: str, section: str,  purpose: Optional[str]= None, created: Optional[str]= None):
         self.name = name
         self.section = section
         self.purpose = purpose
+        self.created = created
     
     @classmethod
     def from_dict(cls, adict: Dict) -> object:
@@ -21,5 +22,6 @@ class Machine:
         return {
             "name": self.name,
             "section": self.section,
-            "purpose": self.purpose
+            "purpose": self.purpose,
+            "created": self.created
         }

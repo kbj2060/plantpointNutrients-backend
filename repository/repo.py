@@ -9,7 +9,7 @@ from repository import db_objects
 from config import connection_data
 
 
-class Repo(Repository):
+class BaseRepo(Repository):
     def __init__(self, connection_data: dict) -> None:
         connection_string = "mysql+pymysql://{}:{}@{}/{}".format(
             connection_data["user"], connection_data["password"], connection_data["host"], connection_data["dbname"]
@@ -17,9 +17,17 @@ class Repo(Repository):
         self.engine = create_engine(connection_string)
         db_objects.Base.metadata.bind = self.engine
 
+    def get_machines(self, filters: dict = None) -> List[machine.Machine]:
+        pass
+
+    def get_sensors(self, filters: dict = None) -> List[sensor.Sensor]:
+        pass
+
+
+class MachineRepository(BaseRepo):
     def _create_machine_db_objects(self, results: List[db_objects.Machine]) -> List[machine.Machine]:
         return [ machine.Machine(
-            name=q.name, section=q.section, purpose=q.purpose
+            name=q.name, section=q.section, purpose=q.purpose, created=q.created
         ) for q in results ]
 
     def get_machines(self, filters: dict = None) -> List[machine.Machine]:
@@ -38,9 +46,11 @@ class Repo(Repository):
 
         return self._create_machine_db_objects(query.all())
 
+
+class SensorRepository(BaseRepo):
     def _create_sensor_db_objects(self, results: List[db_objects.Sensor]) -> List[sensor.Sensor]:
         return [ sensor.Sensor(
-            name=q.name, section=q.section
+            name=q.name, section=q.section, created=q.created
         ) for q in results ]
 
     def get_sensors(self, filters: dict = None) -> List[sensor.Sensor]:
@@ -57,4 +67,6 @@ class Repo(Repository):
 
         return self._create_sensor_db_objects(query.all())
 
-repo = Repo(connection_data)
+
+mRepo = MachineRepository(connection_data)
+sRepo = SensorRepository(connection_data)
