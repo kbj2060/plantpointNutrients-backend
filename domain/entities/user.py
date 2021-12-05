@@ -1,10 +1,11 @@
-from typing import Dict, Optional
+from typing import  Optional, Dict
 
-class Sensor:
-    def __init__(self, name: str, section_id: int, id: Optional[int] = None, createdAt: Optional[str]= None):
+class User:
+    def __init__(self, name: str, password: str, type: str, id: Optional[int] = None, createdAt: Optional[str]= None):
         self.id = id
         self.name = name
-        self.section_id = section_id
+        self.password = password
+        self.type = type
         self.createdAt = createdAt
     
     @classmethod
@@ -15,6 +16,7 @@ class Sensor:
         return {
             "id": self.id,
             "name": self.name,
-            "section_id": self.section_id,
+            "password": self.password,
+            "type": self.type,
             "createdAt": self.createdAt
         }

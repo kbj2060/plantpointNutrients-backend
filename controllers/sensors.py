@@ -2,9 +2,9 @@ from controllers.app import app
 from repository.sensor_repo import sensorRepository
 
 
-@app.get("/sensors")
-def read_machines():
-    return sensorRepository.get_sensors()
+@app.get("/sensor")
+def read_sensors():
+    return sensorRepository.read_sensors()
 
 # @app.get("/sensors/name:{name}")
 # def read_sensors_by_name(name: str):
@@ -13,3 +13,7 @@ def read_machines():
 # @app.get("/sensors/section:{section}")
 # def read_sensors_by_section(section: str):
 #     return sensorRepository.get_sensors(filters={'section__eq': section})
+
+@app.post("/sensor/create")
+def create_sensor():
+    return sensorRepository.create_sensor()

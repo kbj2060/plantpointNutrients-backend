@@ -77,7 +77,7 @@ class Switch(BaseModel):
     id: int
     section_id: int
     machine_id: int
-    status: bool
+    status: int
     controlledBy_id: int
     createdAt: datetime
 

@@ -4,13 +4,12 @@ from repository.repo import BaseRepo
 from repository import models
 from sqlalchemy.orm import sessionmaker
 from config import connection_data
+from utils.remove_sa_state import remove_sa_state
 
 
 class MachineRepository(BaseRepo):
-    def _create_machine_models(self, results: List[models.Machine]) -> List[eMachine]:
-        return [ eMachine(
-            name=q.name, section=q.section, purpose=q.purpose, createdAt=q.createdAt
-        ) for q in results ]
+    def _create_machine_entity(self, results: List[models.Machine]) -> List[eMachine]:
+        return [ eMachine(**remove_sa_state(vars(q))) for q in results ]
 
     def read_machines(self, filters: dict = None) -> List[eMachine]:
         DBSession = sessionmaker(bind=self.engine)
@@ -18,7 +17,7 @@ class MachineRepository(BaseRepo):
         query = session.query(models.Machine)
 
         if filters is None:
-            return self._create_machine_models(query.all())
+            return self._create_machine_entity(query.all())
         if "section__eq" in filters:
             query = query.filter(models.Machine.section == filters["section__eq"])
         if "name__eq" in filters:
@@ -26,7 +25,7 @@ class MachineRepository(BaseRepo):
         if "purpose__eq" in filters:
             query = query.filter(models.Machine.purpose < filters["purpose__eq"])
 
-        return self._create_machine_models(query.all())
+        return self._create_machine_entity(query.all())
 
     def create_machine(self) -> None:
         DBSession = sessionmaker(bind=self.engine)

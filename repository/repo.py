@@ -10,6 +10,7 @@ from domain.entities.sensor import Sensor as eSensor
 
 from domain.interfaces.repository import Repository
 from repository import models
+from utils.remove_sa_state import remove_sa_state
 
 
 class BaseRepo(Repository):

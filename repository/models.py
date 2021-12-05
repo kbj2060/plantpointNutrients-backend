@@ -109,7 +109,7 @@ CREATE TABLE switch (
  id        INT NOT NULL AUTO_INCREMENT,
  section_id    int,
  machine_id     int,
- status   bool,
+ status   int,
  controlledBy_id   int,
  createdAt    DATETIME,
   PRIMARY KEY(id)
@@ -123,7 +123,7 @@ class Switch(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
     machine_id = Column(Integer, ForeignKey('machine.id'))
-    status = Column(Boolean)
+    status = Column(Integer)
     controlledBy_id = Column(Integer, ForeignKey('user.id'))
     createdAt = Column(DateTime, default=datetime.utcnow)
 

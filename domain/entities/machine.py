@@ -9,9 +9,10 @@ from repository.models import Section
 
 
 class Machine:
-    def __init__(self, name: str, section: Section,  purpose: Optional[str]= None, createdAt: Optional[str]= None):
+    def __init__(self, name: str, section_id: Section,  purpose:str, id: Optional[int]= None, createdAt: Optional[str]= None):
+        self.id = id
         self.name = name
-        self.section = section
+        self.section_id = section_id
         self.purpose = purpose
         self.createdAt = createdAt
     
@@ -21,8 +22,9 @@ class Machine:
 
     def to_dict(self) -> Dict:
         return {
+            "id": self.id,
             "name": self.name,
-            "section": self.section,
+            "section_id": self.section_id,
             "purpose": self.purpose,
             "createdAt": self.createdAt
         }
