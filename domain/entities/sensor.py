@@ -1,11 +1,13 @@
 from typing import Dict, Optional
 
+from repository.models import Section
+
 
 class Sensor:
-    def __init__(self, name: str, section: str, created: Optional[str]= None):
+    def __init__(self, name: str, section: Section, createdAt: Optional[str]= None):
         self.name = name
         self.section = section
-        self.created = created
+        self.createdAt = createdAt
     
     @classmethod
     def from_dict(cls, adict: Dict) -> object:
@@ -15,5 +17,5 @@ class Sensor:
         return {
             "name": self.name,
             "section": self.section,
-            "created": self.created
+            "createdAt": self.createdAt
         }

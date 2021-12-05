@@ -1,5 +1,5 @@
 connection_data = {
-    "dbname": "nutrients",
+    "dbname": "nutrient",
     "user": "root", 
     "password": "1234", 
     "host": "localhost"
