@@ -12,7 +12,7 @@ class MachineRepository(BaseRepo):
             name=q.name, section=q.section, purpose=q.purpose, createdAt=q.createdAt
         ) for q in results ]
 
-    def get_machines(self, filters: dict = None) -> List[eMachine]:
+    def read_machines(self, filters: dict = None) -> List[eMachine]:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
         query = session.query(models.Machine)
@@ -28,7 +28,7 @@ class MachineRepository(BaseRepo):
 
         return self._create_machine_models(query.all())
 
-    def add_machine(self) -> None:
+    def create_machine(self) -> None:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
         # DB 에 넣을 때 models 객체를 이용해 넣어야 한다!

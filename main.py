@@ -1,5 +1,7 @@
 from controllers.machines import *
 from controllers.sensors import *
+from controllers.temperature import *
+from controllers.humidity import *
 
 #########################
 # 필요한 정보
