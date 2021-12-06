@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `section`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `section` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `main` varchar(45) DEFAULT NULL,
   `sub` varchar(45) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -155,7 +155,7 @@ DROP TABLE IF EXISTS `sensor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sensor` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `section_id` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -183,7 +183,7 @@ CREATE TABLE `switch` (
   `id` int NOT NULL AUTO_INCREMENT,
   `section_id` int DEFAULT NULL,
   `machine_id` int DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
+  `status` int DEFAULT NULL,
   `controlledBy_id` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

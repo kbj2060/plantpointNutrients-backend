@@ -8,22 +8,19 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class SensorRepository(BaseRepo):
-    def _create_sensor_entity(self, results: List[models.Sensor]) -> List[eSensor]:
-        return [ eSensor(**remove_sa_state(vars(q))) for q in results ]
-
     def read_sensors(self, filters: dict = None) -> List[eSensor]:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
         query = session.query(models.Sensor)
 
         if filters is None:
-            return self._create_sensor_entity(query.all())
+            return self._model2entity(models=query.all(), entity=eSensor)
         if "section__eq" in filters:
-            query = query.filter(models.Sensor.section == filters["section__eq"])
+            result_models = query.filter(models.Sensor.section == filters["section__eq"]).all()
         if "name__eq" in filters:
-            query = query.filter(models.Sensor.name == filters["name__eq"])
+            result_models = query.filter(models.Sensor.name == filters["name__eq"]).all()
 
-        return self._create_sensor_entity(query.all())
+        return self._model2entity(models=result_models, entity=eSensor)
 
     def create_sensor(self) -> None:
         DBSession = sessionmaker(bind=self.engine)

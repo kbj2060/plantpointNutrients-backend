@@ -3,16 +3,8 @@ from repository.sensor_repo import sensorRepository
 
 
 @app.get("/sensor")
-def read_sensors():
-    return sensorRepository.read_sensors()
-
-# @app.get("/sensors/name:{name}")
-# def read_sensors_by_name(name: str):
-#     return sensorRepository.get_sensors(filters={'name__eq': name})
-
-# @app.get("/sensors/section:{section}")
-# def read_sensors_by_section(section: str):
-#     return sensorRepository.get_sensors(filters={'section__eq': section})
+def read_sensors(filters: dict = None):
+    return sensorRepository.read_sensors(filters)
 
 @app.post("/sensor/create")
 def create_sensor():

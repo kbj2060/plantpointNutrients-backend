@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import Iterable, List
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -21,6 +21,11 @@ class BaseRepo(Repository):
         self.engine = create_engine(connection_string, echo=True)
         models.Base.metadata.bind = self.engine
 
+    def _model2entity(self, models, entity):
+        if models is None: return None
+        elif not isinstance(models, list): return entity(**remove_sa_state(vars(models)))
+        return [ entity(**remove_sa_state(vars(q))) for q in models ]
+        
     def get_machines(self, filters: dict = None) -> List[eMachine]:
         pass
 

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from domain.entities.switch import Switch as eSwitch
 from repository.repo import BaseRepo
 from repository import models
@@ -8,20 +8,16 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class SwitchRepository(BaseRepo):
-    def _create_switch_models(self, results: List[models.Switch]) -> List[eSwitch]:
-        return [ eSwitch(**remove_sa_state(vars(q))) for q in results ]
-
-    def read_switch(self) -> eSwitch:
+    def read_switches(self, filters: dict = None) -> eSwitch:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
-        last_switch = session.query(models.Switch).order_by(models.Switch.id.desc()).first()
-        return eSwitch(**remove_sa_state(vars(last_switch))) if last_switch != None else None
 
-    def read_switch_history(self, num: int) -> List[eSwitch]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        switch_history = session.query(models.Switch).order_by(models.Switch.id.desc()).limit(num)
-        return self._create_switch_models(switch_history) if switch_history != None else None
+        if filters is None:
+            result_models = session.query(models.Switch).all()
+        elif "limit" in filters:
+            result_models = session.query(models.Switch).order_by(models.Switch.id.desc()).limit(filters.limit)
+            
+        return self._model2entity(models=result_models, entity=eSwitch)
 
     def create_switch(self) -> None:
         DBSession = sessionmaker(bind=self.engine)

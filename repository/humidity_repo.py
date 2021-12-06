@@ -11,20 +11,18 @@ from datetime import date
 
 
 class HumidityRepository(BaseRepo):
-    def _create_humidity_entity(self, results: List[models.Humidity]) -> List[eHumidity]:
-        return [ eHumidity(**remove_sa_state(vars(q))) for q in results ]
-
-    def read_humidity(self) -> List[eHumidity]:
+    def read_humidity(self, filters: dict = None) -> List[eHumidity]:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
-        last_humidity = session.query(models.Humidity).order_by(models.Humidity.id.desc()).first()
-        return eHumidity(**remove_sa_state(vars(last_humidity)))
 
-    def read_today_humidity(self) -> List[eHumidity]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        query = session.query(models.Humidity).filter(cast(models.Humidity.createdAt, Date) == date.today())
-        return self._create_humidity_entity(query.all())
+        if filters is None:
+            result_models = session.query(models.Humidity).all()
+        elif "limit" in filters:
+            result_models = session.query(models.Humidity).order_by(models.Humidity.id.desc()).limit(filters.limit)
+        elif "today" in filters:
+            result_models = session.query(models.Humidity).filter(cast(models.Humidity.createdAt, Date) == date.today()).all()
+
+        return self._model2entity(models=result_models, entity=eHumidity)
 
     def create_humidity(self) -> None:
         DBSession = sessionmaker(bind=self.engine)

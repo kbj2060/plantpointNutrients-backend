@@ -8,24 +8,21 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class MachineRepository(BaseRepo):
-    def _create_machine_entity(self, results: List[models.Machine]) -> List[eMachine]:
-        return [ eMachine(**remove_sa_state(vars(q))) for q in results ]
-
     def read_machines(self, filters: dict = None) -> List[eMachine]:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
         query = session.query(models.Machine)
 
         if filters is None:
-            return self._create_machine_entity(query.all())
+            return self._model2entity(models=query.all(), entity=eMachine)
         if "section__eq" in filters:
-            query = query.filter(models.Machine.section == filters["section__eq"])
+            result_models = query.filter(models.Machine.section == filters["section__eq"]).all()
         if "name__eq" in filters:
-            query = query.filter(models.Machine.name == filters["name__eq"])
+            result_models = query.filter(models.Machine.name == filters["name__eq"]).all()
         if "purpose__eq" in filters:
-            query = query.filter(models.Machine.purpose < filters["purpose__eq"])
+            result_models = query.filter(models.Machine.purpose < filters["purpose__eq"]).all()
 
-        return self._create_machine_entity(query.all())
+        return self._model2entity(models=result_models, entity=eMachine)
 
     def create_machine(self) -> None:
         DBSession = sessionmaker(bind=self.engine)

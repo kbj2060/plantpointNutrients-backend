@@ -4,6 +4,7 @@ from controllers.temperature import *
 from controllers.humidity import *
 from controllers.user import *
 from controllers.switch import *
+from controllers.section import *
 
 #########################
 # 필요한 정보

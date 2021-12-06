@@ -11,20 +11,18 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class TemperatureRepository(BaseRepo):
-    def _create_temperature_entity(self, results: List[models.Temperature]) -> List[eTemperature]:
-        return [ eTemperature(**remove_sa_state(vars(q))) for q in results ]
-
-    def read_temperature(self) -> eTemperature:
+    def read_temperature(self, filters: dict = None) -> eTemperature:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
-        last_temperature = session.query(models.Temperature).order_by(models.Temperature.id.desc()).first()
-        return eTemperature(**remove_sa_state(vars(last_temperature)))
 
-    def read_today_temperature(self) -> List[eTemperature]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        query = session.query(models.Temperature).filter(cast(models.Temperature.createdAt, Date) == date.today())
-        return self._create_temperature_entity(query.all())
+        if filters is None:
+            result_models = session.query(models.Temperature).all()
+        elif "limit" in filters:
+            result_models = session.query(models.Temperature).order_by(models.Temperature.id.desc()).limit(filters.limit)
+        elif "today" in filters:
+            result_models = session.query(models.Temperature).filter(cast(models.Temperature.createdAt, Date) == date.today()).all()
+
+        return self._model2entity(models=result_models, entity=eTemperature)
 
     def create_temperature(self) -> None:
         DBSession = sessionmaker(bind=self.engine)
