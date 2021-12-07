@@ -7,20 +7,20 @@ from repository.repo import BaseRepo
 from repository import models
 from sqlalchemy.orm import sessionmaker
 from config import connection_data
-from utils.remove_sa_state import remove_sa_state
+from repository.schemas import RequestFilters
 
 
 class TemperatureRepository(BaseRepo):
-    def read_temperature(self, filters: dict = None) -> eTemperature:
+    def read_temperature(self, filters: RequestFilters) -> eTemperature:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
 
-        if filters is None:
-            result_models = session.query(models.Temperature).all()
-        elif "limit" in filters:
-            result_models = session.query(models.Temperature).order_by(models.Temperature.id.desc()).limit(filters.limit)
-        elif "today" in filters:
+        if filters.today:
             result_models = session.query(models.Temperature).filter(cast(models.Temperature.createdAt, Date) == date.today()).all()
+        elif filters.limit > 0:
+            result_models = session.query(models.Temperature).order_by(models.Temperature.id.desc()).limit(filters.limit).all()
+        else:
+            result_models = session.query(models.Temperature).all()
 
         return self._model2entity(models=result_models, entity=eTemperature)
 
