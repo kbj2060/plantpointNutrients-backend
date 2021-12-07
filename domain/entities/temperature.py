@@ -1,7 +1,8 @@
 from typing import  Optional, Dict
+from sqlalchemy.sql.sqltypes import DateTime
 
 class Temperature:
-    def __init__(self, section_id: int, sensor_id: int, value: float, id: Optional[int] = None, createdAt: Optional[str]= None):
+    def __init__(self, section_id: int, sensor_id: int, value: float, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
         self.section_id = section_id
         self.sensor_id = sensor_id

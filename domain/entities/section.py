@@ -1,8 +1,8 @@
 from typing import Dict, Optional
-from sqlalchemy import Date
+from sqlalchemy.sql.sqltypes import DateTime
 
 class Section:
-    def __init__(self, main: str, sub: int, id: Optional[int] = None, createdAt: Optional[Date]= None):
+    def __init__(self, main: str, sub: int, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
         self.main = main
         self.sub = sub

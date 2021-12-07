@@ -8,10 +8,13 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class SensorRepository(BaseRepo):
-    def read_sensors(self, filters: dict = None) -> List[eSensor]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        query = session.query(models.Sensor)
+    def __init__(self, connection_data: dict) -> None:
+        super().__init__(connection_data)
+        self.model = models.Sensor
+        self.entity = eSensor
+
+    def read(self, filters: dict = None) -> List[eSensor]:
+        query = self.session.query(models.Sensor)
 
         if filters is None:
             return self._model2entity(models=query.all(), entity=eSensor)
@@ -22,12 +25,9 @@ class SensorRepository(BaseRepo):
 
         return self._model2entity(models=result_models, entity=eSensor)
 
-    def create_sensor(self) -> None:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        # DB 에 넣을 때 models 객체를 이용해 넣어야 한다!
+    def create(self) -> None:
         new_sensor = models.Sensor(section_id=1, name='temp')
-        session.add(new_sensor)
-        session.commit()
+        self.session.add(new_sensor)
+        self.session.commit()
 
 sensorRepository = SensorRepository(connection_data)

@@ -1,4 +1,3 @@
-from typing import  Optional
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -136,6 +135,3 @@ class Report(BaseModel):
         arbitrary_types_allowed = True
 
 
-class RequestFilters(BaseModel):
-    limit: Optional[int] = 0
-    today: Optional[bool] = False

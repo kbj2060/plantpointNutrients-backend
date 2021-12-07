@@ -1,7 +1,8 @@
 from typing import Dict, Optional
+from sqlalchemy.sql.sqltypes import DateTime
 
 class Switch:
-    def __init__(self, machine_id: int, section_id: int, status: int, controlledBy_id: int, id: Optional[int] = None, createdAt: Optional[str]= None):
+    def __init__(self, machine_id: int, section_id: int, status: int, controlledBy_id: int, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
         self.section_id = section_id
         self.machine_id = machine_id

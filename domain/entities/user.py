@@ -1,7 +1,8 @@
 from typing import  Optional, Dict
+from sqlalchemy.sql.sqltypes import DateTime
 
 class User:
-    def __init__(self, name: str, password: str, type: str, id: Optional[int] = None, createdAt: Optional[str]= None):
+    def __init__(self, name: str, password: str, type: str, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
         self.name = name
         self.password = password

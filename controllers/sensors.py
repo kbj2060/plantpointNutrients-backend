@@ -4,8 +4,8 @@ from repository.sensor_repo import sensorRepository
 
 @app.get("/sensor")
 def read_sensors(filters: dict = None):
-    return sensorRepository.read_sensors(filters)
+    return sensorRepository.read(filters)
 
 @app.post("/sensor/create")
 def create_sensor():
-    return sensorRepository.create_sensor()
+    return sensorRepository.create()

@@ -8,10 +8,8 @@ from utils.remove_sa_state import remove_sa_state
 
 
 class UserRepository(BaseRepo):
-    def read_users(self, filters: dict = None) -> List[eUser]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        query = session.query(models.User)
+    def read(self, filters: dict = None) -> List[eUser]:
+        query = self.session.query(models.User)
 
         if filters is None:
             return self._model2entity(models=query.all(), entity=eUser)
@@ -22,11 +20,9 @@ class UserRepository(BaseRepo):
 
         return self._model2entity(models=result_models, entity=eUser)
 
-    def create_user(self) -> None:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
+    def create(self) -> None:
         new_user = models.User(name="llewyn", password='temp', type='admin')
-        session.add(new_user)
-        session.commit()
+        self.session.add(new_user)
+        self.session.commit()
 
 userRepository = UserRepository(connection_data)

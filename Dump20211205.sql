@@ -103,8 +103,9 @@ DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
   `id` int NOT NULL AUTO_INCREMENT,
   `section_id` int DEFAULT NULL,
+  `machine_id` int DEFAULT NULL,
+  `sensor_id` int DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `subject` varchar(45) DEFAULT NULL,
   `solution` varchar(45) DEFAULT NULL,
   `isFixed` tinyint DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -286,7 +287,7 @@ DROP TABLE IF EXISTS `waterspray`;
 CREATE TABLE `waterspray` (
   `id` int NOT NULL AUTO_INCREMENT,
   `section_id` int DEFAULT NULL,
-  `operatingTime` int DEFAULT NULL,
+  `operating_time` int DEFAULT NULL,
   `period` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

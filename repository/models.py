@@ -81,6 +81,7 @@ class Machine(Base):
     createdAt = Column(DateTime, default=datetime.utcnow)
 
     switches = relationship("Switch", backref ="machine")
+    report = relationship("Report", backref ="machine")
 
 '''
 CREATE TABLE sensor (
@@ -103,6 +104,7 @@ class Sensor(Base):
     
     temperature = relationship("Temperature", backref ="sensor")
     humidity = relationship("Humidity", backref ="sensor")
+    report = relationship("Report", backref ="sensor")
 
 '''
 CREATE TABLE switch (
@@ -266,8 +268,9 @@ class Report(Base):
     __tablename__ = "report"
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
+    sensor_id = Column(Integer, ForeignKey('sensor.id'))
+    machine_id = Column(Integer, ForeignKey('machine.id'))
     level = Column(Integer)
-    subject = Column(String(36))
     solution = Column(String(100))
     isFixed = Column(Boolean)
     createdAt = Column(DateTime, default=datetime.utcnow)

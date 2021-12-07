@@ -5,6 +5,12 @@ from controllers.humidity import *
 from controllers.user import *
 from controllers.switch import *
 from controllers.section import *
+from controllers.watersupply import *
+from controllers.watercycle import *
+from controllers.waterspray import *
+from controllers.nutrientsupply import *
+from controllers.report import *
+
 
 #########################
 # 필요한 정보

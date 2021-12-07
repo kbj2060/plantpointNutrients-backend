@@ -1,4 +1,3 @@
-from typing import  Optional, Dict
 from domain.entities.temperature import Temperature
 
 class Humidity(Temperature):

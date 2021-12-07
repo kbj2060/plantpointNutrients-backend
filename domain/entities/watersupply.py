@@ -1,11 +1,12 @@
 from typing import Dict, Optional
 from sqlalchemy.sql.sqltypes import DateTime
 
-class Sensor:
-    def __init__(self, name: str, section_id: int, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
+
+class WaterSupply:
+    def __init__(self, section_id: int, quantity: int, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
-        self.name = name
         self.section_id = section_id
+        self.quantity = quantity
         self.createdAt = createdAt
     
     @classmethod
@@ -15,7 +16,7 @@ class Sensor:
     def to_dict(self) -> Dict:
         return {
             "id": self.id,
-            "name": self.name,
             "section_id": self.section_id,
+            "quantity": self.quantity,
             "createdAt": self.createdAt
         }

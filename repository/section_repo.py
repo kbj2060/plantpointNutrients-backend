@@ -7,11 +7,14 @@ from config import connection_data
 
 
 class SectionRepository(BaseRepo):
-    def read_sections(self) -> List[eSection]:
-        DBSession = sessionmaker(bind=self.engine)
-        session = DBSession()
-        query = session.query(models.Section)
-        return self._model2entity(models=query.all(), entity=eSection)
+    def __init__(self, connection_data: dict) -> None:
+        super().__init__(connection_data)
+        self.model = models.Section
+        self.entity = eSection
+
+    def read(self) -> List[eSection]:
+        query = self.session.query(models.Section)
+        return self._model2entity(models=query.all(), entity=self.entity)
 
 
 sectionRepository = SectionRepository(connection_data)
