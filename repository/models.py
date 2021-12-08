@@ -25,7 +25,7 @@ class User(Base):
     name = Column(String(36))
     password = Column(String(36))
     type = Column(String(36))
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
     switches = relationship("Switch", backref ="user")
 
@@ -46,7 +46,7 @@ class Section(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     main = Column(String(36))
     sub = Column(String(36))
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
     machines = relationship("Machine", backref ="section")
     sensors = relationship("Sensor", backref ="section")
@@ -78,7 +78,7 @@ class Machine(Base):
     name = Column(String(36))
     section_id = Column(Integer, ForeignKey('section.id'))
     purpose = Column(String(36))
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
     switches = relationship("Switch", backref ="machine")
     report = relationship("Report", backref ="machine")
@@ -100,7 +100,7 @@ class Sensor(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(36))
     section_id = Column(Integer, ForeignKey('section.id'))
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
     
     temperature = relationship("Temperature", backref ="sensor")
     humidity = relationship("Humidity", backref ="sensor")
@@ -127,7 +127,7 @@ class Switch(Base):
     machine_id = Column(Integer, ForeignKey('machine.id'))
     status = Column(Integer)
     controlledBy_id = Column(Integer, ForeignKey('user.id'))
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE temperature (
@@ -148,7 +148,7 @@ class Temperature(Base):
     section_id = Column(Integer, ForeignKey('section.id'))
     sensor_id = Column(Integer, ForeignKey('sensor.id'))
     value = Column(Float)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE humidity (
@@ -169,7 +169,7 @@ class Humidity(Base):
     section_id = Column(Integer, ForeignKey('section.id'))
     sensor_id = Column(Integer, ForeignKey('sensor.id'))
     value = Column(Float)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE watersupply (
@@ -188,7 +188,7 @@ class WaterSupply(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
     quantity = Column(Float)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE watercycle (
@@ -207,7 +207,7 @@ class WaterCycle(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
     period = Column(Integer)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE waterspray (
@@ -228,7 +228,7 @@ class WaterSpray(Base):
     section_id = Column(Integer, ForeignKey('section.id'))
     operating_time = Column(Integer)
     period = Column(Integer)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE nutrientsupply (
@@ -247,7 +247,7 @@ class NutrientSupply(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
     quantity = Column(Float)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
 '''
 CREATE TABLE report (
@@ -273,5 +273,5 @@ class Report(Base):
     level = Column(Integer)
     solution = Column(String(100))
     isFixed = Column(Boolean)
-    createdAt = Column(DateTime, default=datetime.utcnow)
+    createdAt = Column(DateTime, default=datetime.now())
 
