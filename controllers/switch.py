@@ -9,10 +9,6 @@ async def read_switches(req: Request):
     filters = await validate_filters(req=req)
     return switchRepository.read(filters)
 
-# @app.get("/switch/history")
-# def read_switch_history(num: int = 5):
-#     return switchRepository.read_switch_history(num)
-
 @app.post("/switch/create")
 def create_switch():
     return switchRepository.create()
