@@ -2,6 +2,7 @@ from starlette.requests import Request
 from controllers.app import app
 from controllers.utils import validate_filters
 from repository.switch_repo import switchRepository
+from typing import Union
 
 
 @app.post("/switch")
