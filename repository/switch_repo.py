@@ -3,7 +3,7 @@ from domain.interfaces.RequestFilters import RequestFilters
 from repository.repo import BaseRepo
 from repository import models
 from config import connection_data
-from sqlalchemy import func, and_
+from sqlalchemy import func
 
 
 class SwitchRepository(BaseRepo):

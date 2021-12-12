@@ -12,12 +12,6 @@ class ReportRepository(BaseRepo):
         super().__init__(connection_data)
         self.model = models.Report
         self.entity = eReport
-
-    def read(self, filters: RequestFilters):
-        if filters is None: return None
-        query = self.session.query(self.model)
-        if query is not None: return self._model2entity(models=query.all(), entity=self.entity)
-        else: print('Error report is written.')
         
     def create_report(self):
         new_report = models.Report(section_id=1, machine_id=3, sensor_id=None, level=3, solution="dd", isFixed=False)

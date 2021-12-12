@@ -106,7 +106,6 @@ CREATE TABLE `report` (
   `machine_id` int DEFAULT NULL,
   `sensor_id` int DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `solution` varchar(45) DEFAULT NULL,
   `isFixed` tinyint DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

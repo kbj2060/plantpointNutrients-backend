@@ -11,7 +11,6 @@ from controllers.waterspray import *
 from controllers.nutrientsupply import *
 from controllers.report import *
 
-
 #########################
 # 필요한 정보
 # 1. 단계별 A 양액이 들어가는 양
