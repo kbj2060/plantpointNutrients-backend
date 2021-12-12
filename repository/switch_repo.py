@@ -22,8 +22,9 @@ class SwitchRepository(BaseRepo):
             query = self.session.query(self.model, models.User.name).join(self.model).order_by(self.model.id.desc()).limit(filters.limit)
         return query.all()
         
-    def create(self) -> None:
-        new_switch = models.Switch(section_id=1, machine_id=1, status=0, controlledBy_id=1)
+    def create(self, **kargs) -> None:
+        print(kargs)
+        new_switch = models.Switch(**kargs)
         self.session.add(new_switch)
         self.session.commit()
 

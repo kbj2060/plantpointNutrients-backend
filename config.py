@@ -1,6 +1,8 @@
 connection_data = {
     "dbname": "nutrient",
     "user": "root", 
-    "password": "01055646565", 
+    "password": "1234", 
     "host": "localhost"
 }
+
+mqtt_sub = ['+/+/humidity', '+/+/temperature']

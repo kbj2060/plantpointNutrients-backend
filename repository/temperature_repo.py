@@ -8,6 +8,7 @@ from repository import models
 from sqlalchemy.orm import sessionmaker
 from config import connection_data
 from domain.interfaces.RequestFilters import RequestFilters
+from sqlalchemy import and_
 
 
 class TemperatureRepository(BaseRepo):
@@ -16,8 +17,13 @@ class TemperatureRepository(BaseRepo):
         self.model = models.Temperature
         self.entity = eTemperature
 
-    def create(self) -> None:
-        new_temperautre = models.Temperature(section_id=1, sensor_id=1, value=21)
+    def create(self, m_section, s_section, value) -> None:
+        section = self.session.query(
+            models.Section.id
+        ).filter(
+            and_(models.Section.main == str(m_section), models.Section.sub == str(s_section))
+        ).first()
+        new_temperautre = self.model(section_id=section.id, value=int(value))
         self.session.add(new_temperautre)
         self.session.commit()
 

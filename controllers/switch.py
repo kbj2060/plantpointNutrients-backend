@@ -11,5 +11,7 @@ async def read_switches(req: Request):
     return switchRepository.read(filters)
 
 @app.post("/switch/create")
-def create_switch():
-    return switchRepository.create()
+async def create_switch(req: Request):
+    res = await req.json()
+    print(res['data'])
+    return switchRepository.create(**res['data'])

@@ -50,7 +50,6 @@ class Section(Base):
     createdAt = Column(DateTime, server_default=func.now())
 
     machines = relationship("Machine", backref ="section")
-    sensors = relationship("Sensor", backref ="section")
     humidity = relationship("Humidity", backref ="section")
     temperature = relationship("Temperature", backref ="section")
     switches = relationship("Switch", backref ="section")
@@ -84,28 +83,28 @@ class Machine(Base):
     switches = relationship("Switch", backref ="machine")
     report = relationship("Report", backref ="machine")
 
-'''
-CREATE TABLE sensor (
- id        INT NOT NULL AUTO_INCREMENT,
- name     VARCHAR(20),
- section_id    int,
- createdAt    DATETIME,
-  PRIMARY KEY(id)
-);
+# '''
+# CREATE TABLE sensor (
+#  id        INT NOT NULL AUTO_INCREMENT,
+#  name     VARCHAR(20),
+#  section_id    int,
+#  createdAt    DATETIME,
+#   PRIMARY KEY(id)
+# );
 
-INSERT INTO sensor(id, name, section_id, createdAt)
-VALUES(1, 'temperature', 's1/d1', now());
-'''
-class Sensor(Base):
-    __tablename__ = "sensor"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(36))
-    section_id = Column(Integer, ForeignKey('section.id'))
-    createdAt = Column(DateTime, server_default=func.now())
+# INSERT INTO sensor(id, name, section_id, createdAt)
+# VALUES(1, 'temperature', 's1/d1', now());
+# '''
+# class Sensor(Base):
+#     __tablename__ = "sensor"
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     name = Column(String(36))
+#     section_id = Column(Integer, ForeignKey('section.id'))
+#     createdAt = Column(DateTime, server_default=func.now())
     
-    temperature = relationship("Temperature", backref ="sensor")
-    humidity = relationship("Humidity", backref ="sensor")
-    report = relationship("Report", backref ="sensor")
+#     temperature = relationship("Temperature", backref ="sensor")
+#     humidity = relationship("Humidity", backref ="sensor")
+#     report = relationship("Report", backref ="sensor")
 
 '''
 CREATE TABLE switch (
@@ -147,7 +146,6 @@ class Temperature(Base):
     __tablename__ = "temperature"
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
-    sensor_id = Column(Integer, ForeignKey('sensor.id'))
     value = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -168,7 +166,6 @@ class Humidity(Base):
     __tablename__ = "humidity"
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
-    sensor_id = Column(Integer, ForeignKey('sensor.id'))
     value = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -269,7 +266,6 @@ class Report(Base):
     __tablename__ = "report"
     id = Column(Integer, primary_key=True, autoincrement=True)
     section_id = Column(Integer, ForeignKey('section.id'))
-    sensor_id = Column(Integer, ForeignKey('sensor.id'))
     machine_id = Column(Integer, ForeignKey('machine.id'))
     level = Column(Integer)
     isFixed = Column(Boolean)

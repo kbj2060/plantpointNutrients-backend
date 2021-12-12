@@ -10,18 +10,5 @@ async def read_humidity(req: Request):
     return humidityRepository.read(filters)
 
 @app.post("/humidity/create")
-def create_humidity():
-    return humidityRepository.create()
-
-@mqtt.on_connect()
-def connect(client, flags, rc, properties):
-    mqtt.client.subscribe("mqtt")
-    print("Connected: ", client, flags, rc, properties)
-
-@mqtt.on_subscribe()
-def subscribe(client, mid, qos, properties):
-    print("subscribed", properties)
-
-@mqtt.on_message()
-async def message(client, topic, payload, qos, properties):
-    print("Received message: ",topic, payload.decode())
+def create_humidity(m_section, s_section, value):
+    return humidityRepository.create(m_section, s_section, value)

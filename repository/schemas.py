@@ -36,22 +36,9 @@ class Machine(BaseModel):
         orm_mode = True
         arbitrary_types_allowed = True
 
-
-class Sensor(BaseModel):
-    id: int
-    name: str
-    section_id: int
-    createdAt: datetime
-
-    class Config:
-        orm_mode = True
-        arbitrary_types_allowed = True
-
-
 class Humidity(BaseModel):
     id: int
     section_id: int
-    sensor_id: int
     value: float
     createdAt: datetime
 
@@ -63,7 +50,6 @@ class Humidity(BaseModel):
 class Temperature(BaseModel):
     id: int
     section_id: int
-    sensor_id: int
     value: float
     createdAt: datetime
 
