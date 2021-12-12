@@ -7,7 +7,6 @@ class Report:
         self, 
         section_id: int, 
         level: int, 
-        solution: str, 
         isFixed: int, 
         id: Optional[int] = None, 
         machine_id: Optional[int] = None, 
@@ -19,7 +18,6 @@ class Report:
         self.level = level
         self.sensor_id = sensor_id
         self.machine_id = machine_id
-        self.solution = solution
         self.isFixed = isFixed
         self.createdAt = createdAt
 
@@ -35,7 +33,6 @@ class Report:
             "machine_id": self.machine_id,
             "sensor_id": self.sensor_id,
             "level": self.level,
-            "solution": self.solution,
             "isFixed": self.isFixed,
             "createdAt": self.createdAt
         }

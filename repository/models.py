@@ -272,7 +272,6 @@ class Report(Base):
     sensor_id = Column(Integer, ForeignKey('sensor.id'))
     machine_id = Column(Integer, ForeignKey('machine.id'))
     level = Column(Integer)
-    solution = Column(String(100))
     isFixed = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 

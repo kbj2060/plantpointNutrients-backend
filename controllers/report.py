@@ -12,4 +12,3 @@ async def read_report(req: Request):
 @app.post("/report/create")
 def create_report():
     return reportRepository.create()
-    
