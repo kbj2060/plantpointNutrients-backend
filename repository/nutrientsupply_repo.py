@@ -24,7 +24,7 @@ class NutrientSupplyRepository(BaseRepo):
     #     return self._model2entity(models=result_models, entity=eNutrientSupply)
 
     def create(self):
-        new_nutrientsupply = models.NutrientSupply(section_id=1, quantity=12)
+        new_nutrientsupply = models.NutrientSupply(quantity=12)
         self.session.add(new_nutrientsupply)
         self.session.commit()
 

@@ -23,7 +23,7 @@ class WaterCycleRepository(BaseRepo):
     #     return self._model2entity(models=result_models, entity=eWaterCycle)
 
     def create(self):
-        new_watercycle = models.WaterCycle(section_id=1, period=12)
+        new_watercycle = models.WaterCycle(period=12)
         self.session.add(new_watercycle)
         self.session.commit()
 

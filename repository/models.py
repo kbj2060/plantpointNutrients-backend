@@ -49,16 +49,6 @@ class Section(Base):
     sub = Column(String(36))
     createdAt = Column(DateTime, server_default=func.now())
 
-    machines = relationship("Machine", backref ="section")
-    humidity = relationship("Humidity", backref ="section")
-    temperature = relationship("Temperature", backref ="section")
-    switches = relationship("Switch", backref ="section")
-    watersupply = relationship("WaterSupply", backref ="section")
-    watercycle = relationship("WaterCycle", backref ="section")
-    waterspray = relationship("WaterSpray", backref ="section")
-    nutrientsupply = relationship("NutrientSupply", backref ="section")
-    report = relationship("Report", backref ="section")
-
 '''
 CREATE TABLE machine (
  id        INT NOT NULL AUTO_INCREMENT,
@@ -76,7 +66,6 @@ class Machine(Base):
     __tablename__ = "machine"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(36))
-    section_id = Column(Integer, ForeignKey('section.id'))
     purpose = Column(String(36))
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -123,7 +112,6 @@ VALUES(1, 1, 'waterpump', true, 1, now());
 class Switch(Base):
     __tablename__ = "switch"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     machine_id = Column(Integer, ForeignKey('machine.id'))
     status = Column(Integer)
     controlledBy_id = Column(Integer, ForeignKey('user.id'))
@@ -145,7 +133,6 @@ VALUES(1, 's1/d1', 'temperature', 32, now());
 class Temperature(Base):
     __tablename__ = "temperature"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     value = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -165,7 +152,6 @@ VALUES(1, 's1/d1', 'humidity', 32, now());
 class Humidity(Base):
     __tablename__ = "humidity"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     value = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -184,7 +170,6 @@ VALUES(1, 's1/d1', 10, now());
 class WaterSupply(Base):
     __tablename__ = "watersupply"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     quantity = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -203,7 +188,6 @@ VALUES(1, 's1/d1', 3, now());
 class WaterCycle(Base):
     __tablename__ = "watercycle"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     period = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -223,7 +207,6 @@ VALUES(1, 's1/d1', 2, 3, now());
 class WaterSpray(Base):
     __tablename__ = "waterspray"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     operating_time = Column(Integer)
     period = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())
@@ -243,7 +226,6 @@ VALUES(1, 's1/d1', 3, now());
 class NutrientSupply(Base):
     __tablename__ = "nutrientsupply"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     quantity = Column(Float)
     createdAt = Column(DateTime, server_default=func.now())
 
@@ -265,7 +247,6 @@ VALUES(1, 's1/d1', 3, 'temperature', '', false, now());
 class Report(Base):
     __tablename__ = "report"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    section_id = Column(Integer, ForeignKey('section.id'))
     machine_id = Column(Integer, ForeignKey('machine.id'))
     level = Column(Integer)
     isFixed = Column(Boolean)

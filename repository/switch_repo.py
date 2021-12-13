@@ -1,4 +1,5 @@
 from domain.entities.switch import Switch as eSwitch
+from domain.interfaces.RequestCreateSwitch import RequestCreateSwitch
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.repo import BaseRepo
 from repository import models
@@ -22,9 +23,8 @@ class SwitchRepository(BaseRepo):
             query = self.session.query(self.model, models.User.name).join(self.model).order_by(self.model.id.desc()).limit(filters.limit)
         return query.all()
         
-    def create(self, **kargs) -> None:
-        print(kargs)
-        new_switch = models.Switch(**kargs)
+    def create(self, data: RequestCreateSwitch) -> None:
+        new_switch = models.Switch(**data)
         self.session.add(new_switch)
         self.session.commit()
 

@@ -23,7 +23,7 @@ class WaterSupplyRepository(BaseRepo):
     #     return self._model2entity(models=result_models, entity=eWaterSupply)
 
     def create(self):
-        new_watersupply = models.WaterSupply(section_id=1, quantity=12)
+        new_watersupply = models.WaterSupply(quantity=12)
         self.session.add(new_watersupply)
         self.session.commit()
 

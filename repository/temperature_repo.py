@@ -17,13 +17,8 @@ class TemperatureRepository(BaseRepo):
         self.model = models.Temperature
         self.entity = eTemperature
 
-    def create(self, m_section, s_section, value) -> None:
-        section = self.session.query(
-            models.Section.id
-        ).filter(
-            and_(models.Section.main == str(m_section), models.Section.sub == str(s_section))
-        ).first()
-        new_temperautre = self.model(section_id=section.id, value=int(value))
+    def create(self, value) -> None:
+        new_temperautre = self.model(value=int(value))
         self.session.add(new_temperautre)
         self.session.commit()
 

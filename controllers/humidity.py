@@ -1,5 +1,5 @@
 from starlette.requests import Request
-from controllers.app import app, mqtt
+from controllers.app import app
 from controllers.utils import validate_filters
 from repository.humidity_repo import humidityRepository
 

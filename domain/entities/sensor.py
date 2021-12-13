@@ -2,10 +2,9 @@ from typing import Dict, Optional
 from sqlalchemy.sql.sqltypes import DateTime
 
 class Sensor:
-    def __init__(self, name: str, section_id: int, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
+    def __init__(self, name: str, id: Optional[int] = None, createdAt: Optional[DateTime]= None):
         self.id = id
         self.name = name
-        self.section_id = section_id
         self.createdAt = createdAt
     
     @classmethod
@@ -16,6 +15,5 @@ class Sensor:
         return {
             "id": self.id,
             "name": self.name,
-            "section_id": self.section_id,
             "createdAt": self.createdAt
         }

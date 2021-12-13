@@ -22,9 +22,8 @@ def connect(client, flags, rc, properties):
 
 @mqtt.on_message()
 async def message(client, topic, payload, qos, properties):
-    [m_section, s_section, topic] = topic.split('/')
+    topic= topic.split('/')[-1]
     if topic == 'temperature':
-        print(m_section, s_section, topic)
-        create_temperature(m_section, s_section, payload)
+        create_temperature(payload)
     elif topic == 'humidity':
-        create_humidity(m_section, s_section, payload)
+        create_humidity(payload)

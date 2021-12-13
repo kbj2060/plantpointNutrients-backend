@@ -28,7 +28,6 @@ class Section(BaseModel):
 class Machine(BaseModel):
     id: int
     name: str
-    section_id: int
     purpose: str
     createdAt: datetime
 
@@ -38,7 +37,6 @@ class Machine(BaseModel):
 
 class Humidity(BaseModel):
     id: int
-    section_id: int
     value: float
     createdAt: datetime
 
@@ -49,7 +47,6 @@ class Humidity(BaseModel):
 
 class Temperature(BaseModel):
     id: int
-    section_id: int
     value: float
     createdAt: datetime
 
@@ -60,7 +57,6 @@ class Temperature(BaseModel):
 
 class Switch(BaseModel):
     id: int
-    section_id: int
     machine_id: int
     status: int
     controlledBy_id: int
@@ -72,7 +68,6 @@ class Switch(BaseModel):
 
 class WaterSupply(BaseModel):
     id: int
-    section_id: int
     quantity: float
     createdAt: datetime
     class Config:
@@ -81,7 +76,6 @@ class WaterSupply(BaseModel):
 
 class WaterCycle(BaseModel):
     id: int
-    section_id: int
     period: int
     createdAt: datetime
     class Config:
@@ -90,7 +84,6 @@ class WaterCycle(BaseModel):
 
 class WaterSpray(BaseModel):
     id: int
-    section_id: int
     operating_time: int
     period: int
     createdAt: datetime
@@ -100,7 +93,6 @@ class WaterSpray(BaseModel):
 
 class NutrientSupply(BaseModel):
     id: int
-    section_id: int
     quantity: float
     createdAt: datetime
     class Config:
@@ -109,7 +101,6 @@ class NutrientSupply(BaseModel):
 
 class Report(BaseModel):
     id: int
-    section_id: int
     level: str
     subject: str
     solution: str

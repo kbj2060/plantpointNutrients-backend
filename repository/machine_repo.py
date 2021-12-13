@@ -24,7 +24,7 @@ class MachineRepository(BaseRepo):
 
     def create_machine(self) -> None:
         # DB 에 넣을 때 models 객체를 이용해 넣어야 한다!
-        new_machine = models.Machine(section_id=1, purpose='temp', name='temp')
+        new_machine = models.Machine(purpose='temp', name='temp')
         self.session.add(new_machine)
         self.session.commit()
 

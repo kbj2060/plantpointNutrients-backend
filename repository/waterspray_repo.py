@@ -25,7 +25,7 @@ class WaterSprayRepository(BaseRepo):
     #     return self._model2entity(models=result_models, entity=eWaterSpray)
 
     def create(self):
-        new_waterspray = models.WaterSpray(section_id=1, period=12, operating_time=12)
+        new_waterspray = models.WaterSpray(period=12, operating_time=12)
         self.session.add(new_waterspray)
         self.session.commit()
 

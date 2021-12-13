@@ -10,5 +10,5 @@ async def read_temperature(req: Request):
     return temperatureRepository.read(filters)
 
 @app.post("/temperature/create")
-def create_temperature(m_section, s_section, value):
-    return temperatureRepository.create(m_section, s_section, value)
+def create_temperature(value):
+    return temperatureRepository.create(value)
