@@ -1,7 +1,18 @@
-from controllers.app import app, mqtt
+from controllers.app import app
 from controllers.humidity import create_humidity
 from controllers.temperature import create_temperature
 from config import mqtt_sub
+from fastapi_mqtt import FastMQTT, MQTTConfig
+
+mqtt_config = MQTTConfig(
+    host = "localhost",
+    port= 1883,
+    keepalive = 60
+)
+mqtt = FastMQTT(
+    config=mqtt_config
+    )
+mqtt.init_app(app)
 
 @mqtt.on_connect()
 def connect(client, flags, rc, properties):
