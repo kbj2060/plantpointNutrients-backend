@@ -28,7 +28,6 @@ class Section(BaseModel):
 class Machine(BaseModel):
     id: int
     name: str
-    purpose: str
     createdAt: datetime
 
     class Config:
@@ -102,8 +101,8 @@ class NutrientSupply(BaseModel):
 class Report(BaseModel):
     id: int
     level: str
-    subject: str
-    solution: str
+    machine_id: int
+    sensor_id: int
     isFixed: bool
     createdAt: datetime
 

@@ -4,5 +4,4 @@ connection_data = {
     "password": "1234", 
     "host": "localhost"
 }
-
-mqtt_sub = ['+/+/humidity', '+/+/temperature']
+section = 's1/d1'

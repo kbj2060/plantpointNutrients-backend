@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy import Date, cast
 from domain.interfaces.RequestFilters import RequestFilters

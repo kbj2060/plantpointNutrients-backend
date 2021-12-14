@@ -10,5 +10,5 @@ async def read_humidity(req: Request):
     return humidityRepository.read(filters)
 
 @app.post("/humidity/create")
-def create_humidity(m_section, s_section, value):
-    return humidityRepository.create(m_section, s_section, value)
+def create_humidity(value):
+    return humidityRepository.create(value)

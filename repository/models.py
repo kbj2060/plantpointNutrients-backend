@@ -54,46 +54,41 @@ CREATE TABLE machine (
  id        INT NOT NULL AUTO_INCREMENT,
  name     VARCHAR(20),
  section_id    int,
- purpose   VARCHAR(50),
  createdAt    DATETIME,
   PRIMARY KEY(id)
 );
 
-INSERT INTO machine(id, name, section_id, purpose, createdAt)
+INSERT INTO machine(id, name, section_id, createdAt)
 VALUES(1, 'waterpump', 's1/d1', 'drain', now());
 '''
 class Machine(Base):
     __tablename__ = "machine"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(36))
-    purpose = Column(String(36))
     createdAt = Column(DateTime, server_default=func.now())
 
     switches = relationship("Switch", backref ="machine")
     report = relationship("Report", backref ="machine")
 
-# '''
-# CREATE TABLE sensor (
-#  id        INT NOT NULL AUTO_INCREMENT,
-#  name     VARCHAR(20),
-#  section_id    int,
-#  createdAt    DATETIME,
-#   PRIMARY KEY(id)
-# );
+'''
+CREATE TABLE sensor (
+ id        INT NOT NULL AUTO_INCREMENT,
+ name     VARCHAR(20),
+ section_id    int,
+ createdAt    DATETIME,
+  PRIMARY KEY(id)
+);
 
 # INSERT INTO sensor(id, name, section_id, createdAt)
 # VALUES(1, 'temperature', 's1/d1', now());
 # '''
-# class Sensor(Base):
-#     __tablename__ = "sensor"
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     name = Column(String(36))
-#     section_id = Column(Integer, ForeignKey('section.id'))
-#     createdAt = Column(DateTime, server_default=func.now())
-    
-#     temperature = relationship("Temperature", backref ="sensor")
-#     humidity = relationship("Humidity", backref ="sensor")
-#     report = relationship("Report", backref ="sensor")
+class Sensor(Base):
+    __tablename__ = "sensor"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(36))
+    createdAt = Column(DateTime, server_default=func.now())
+  
+    report = relationship("Report", backref ="sensor")
 
 '''
 CREATE TABLE switch (
@@ -248,6 +243,7 @@ class Report(Base):
     __tablename__ = "report"
     id = Column(Integer, primary_key=True, autoincrement=True)
     machine_id = Column(Integer, ForeignKey('machine.id'))
+    sensor_id = Column(Integer, ForeignKey('sensor.id'))
     level = Column(Integer)
     isFixed = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())

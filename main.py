@@ -4,6 +4,7 @@ from controllers.temperature import *
 from controllers.humidity import *
 from controllers.user import *
 from controllers.switch import *
+from controllers.sensors import *
 from controllers.section import *
 from controllers.watersupply import *
 from controllers.watercycle import *

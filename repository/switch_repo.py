@@ -24,7 +24,11 @@ class SwitchRepository(BaseRepo):
         return query.all()
         
     def create(self, data: RequestCreateSwitch) -> None:
-        new_switch = models.Switch(**data)
+        new_switch = models.Switch(
+            machine_id=data['machine_id'], 
+            status=data['status'], 
+            controlledBy_id=data['controlledBy_id']
+            )
         self.session.add(new_switch)
         self.session.commit()
 
