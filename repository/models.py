@@ -202,7 +202,6 @@ VALUES(1, 's1/d1', 2, 3, now());
 class WaterSpray(Base):
     __tablename__ = "waterspray"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    operating_time = Column(Integer)
     period = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())
 

@@ -10,6 +10,7 @@ async def read_watercycle(req: Request):
     return waterCycleRepository.read(filters)
 
 @app.post("/watercycle/create")
-def create_watercycle():
-    return waterCycleRepository.create()
+async def create_watercycle(req: Request):
+    req = await req.json()
+    return waterCycleRepository.create(req['data'])
     

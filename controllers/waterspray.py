@@ -10,6 +10,7 @@ async def read_waterspray(req: Request):
     return waterSprayRepository.read(filters)
 
 @app.post("/waterspray/create")
-def create_waterspray():
-    return waterSprayRepository.create()
+async def create_waterspray(req: Request):
+    req = await req.json()
+    return waterSprayRepository.create(req['data'])
     

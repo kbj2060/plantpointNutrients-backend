@@ -83,7 +83,6 @@ class WaterCycle(BaseModel):
 
 class WaterSpray(BaseModel):
     id: int
-    operating_time: int
     period: int
     createdAt: datetime
     class Config:

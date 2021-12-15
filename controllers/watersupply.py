@@ -10,5 +10,6 @@ async def read_watersupply(req: Request):
     return waterSupplyRepository.read(filters)
 
 @app.post("/watersupply/create")
-def create_watersupply():
-    return waterSupplyRepository.create()
+async def create_watersupply(req: Request):
+    req = await req.json()
+    return waterSupplyRepository.create(req['data'])

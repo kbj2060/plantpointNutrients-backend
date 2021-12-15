@@ -10,5 +10,6 @@ async def read_nutrientsupply(req: Request):
     return nutrientSupplyRepository.read(filters)
 
 @app.post("/nutrientsupply/create")
-def create_nutrientsupply():
-    return nutrientSupplyRepository.create()
+async def create_nutrientsupply(req: Request):
+    req = await req.json()
+    return nutrientSupplyRepository.create(req['data'])

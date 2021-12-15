@@ -11,20 +11,9 @@ class NutrientSupplyRepository(BaseRepo):
         super().__init__(connection_data)
         self.model = models.NutrientSupply
         self.entity = eNutrientSupply
-    # def read(self, filters:dict = None) -> List[eNutrientSupply]:
-    #     DBSession = sessionmaker(bind=self.engine)
-    #     session = DBSession()
-    #     query = session.query(models.NutrientSupply)
-        
-    #     if filters is None:
-    #         result_models = query.all()
-    #     elif "limit" in filters:
-    #         result_models = query.order_by(models.NutrientSupply.id.desc()).limit(filters.limit)
-        
-    #     return self._model2entity(models=result_models, entity=eNutrientSupply)
 
-    def create(self):
-        new_nutrientsupply = models.NutrientSupply(quantity=12)
+    def create(self, qauntity):
+        new_nutrientsupply = models.NutrientSupply(quantity=qauntity)
         self.session.add(new_nutrientsupply)
         self.session.commit()
 
