@@ -10,5 +10,6 @@ async def read_report(req: Request):
     return reportRepository.read(filters)
 
 @app.post("/report/create")
-def create_report():
-    return reportRepository.create()
+async def create_report(req: Request):
+    req = await req.json()
+    return reportRepository.create(**req['data'])
