@@ -2,7 +2,7 @@ from controllers.app import app
 from controllers.humidity import create_humidity
 from controllers.temperature import create_temperature
 from fastapi_mqtt import FastMQTT, MQTTConfig
-from config import section
+from config import SECTION
 
 '''
 section/switch/waterpump
@@ -22,7 +22,7 @@ mqtt.init_app(app)
 
 @mqtt.on_connect()
 def connect(client, flags, rc, properties):
-    mqtt.client.subscribe(f'{section}/#')
+    mqtt.client.subscribe(f'{SECTION}/#')
     print("Connected: ", client, flags, rc, properties)
 
 @mqtt.on_message()

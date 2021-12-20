@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-
+class Token(BaseModel):
+    Authorization: str = None
+    
 class User(BaseModel):
     id: int
     name: str

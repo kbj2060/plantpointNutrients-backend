@@ -4,4 +4,6 @@ connection_data = {
     "password": "1234", 
     "host": "localhost"
 }
-section = 's1/d1'
+SECTION = 's1/d1'
+JWT_SECRET = "1q2w3e4r!@#"
+JWT_ALGORITHM = "HS256"
