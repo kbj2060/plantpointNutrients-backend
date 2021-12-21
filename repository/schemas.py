@@ -6,9 +6,9 @@ class Token(BaseModel):
     
 class User(BaseModel):
     id: int
+    email: str
     name: str
     password: str
-    type: str
     createdAt: datetime
 
     class Config:

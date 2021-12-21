@@ -23,9 +23,9 @@ VALUES(1, 'waterpump', '1234', 'admin', now());
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String(36))
     name = Column(String(36))
-    password = Column(String(36))
-    type = Column(String(36))
+    password = Column(String(100))
     createdAt = Column(DateTime, server_default=func.now())
 
     switches = relationship("Switch", backref ="user")
