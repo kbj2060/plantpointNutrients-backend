@@ -1,11 +1,11 @@
-from sqlalchemy.sql.expression import and_
+from controllers.user import read_users
 from domain.entities.switch import Switch as eSwitch
 from domain.interfaces.RequestCreateSwitch import RequestCreateSwitch
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.repo import BaseRepo
 from repository import models
 from config import connection_data
-from sqlalchemy import func, and_
+from sqlalchemy import func
 
 
 class SwitchRepository(BaseRepo):
@@ -21,17 +21,19 @@ class SwitchRepository(BaseRepo):
             sub = self.session.query(func.max(self.model.id).label('maxid')).group_by(self.model.machine_id).subquery('t2')
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
         elif filters.limit:
-            query = self.session.query(self.model, models.User.name).join(self.model).order_by(self.model.id.desc()).limit(filters.limit)
+            query = self.session.query(self.model, models.User.name, models.Machine.name).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit)
         elif filters.autoEachLast:
             sub = self.session.query(func.max(self.model.id).label('maxid')).filter(self.model.controlledBy_id == 1).group_by(self.model.machine_id).subquery('t2')
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
         return query.all()
         
     def create(self, data: RequestCreateSwitch) -> None:
+        user = read_users({"name__eq": data['controlledBy']})[0]
+        print(user)
         new_switch = models.Switch(
             machine_id=data['machine_id'], 
             status=data['status'], 
-            controlledBy_id=data['controlledBy_id']
+            controlledBy_id=user.id
             )
         self.session.add(new_switch)
         self.session.commit()

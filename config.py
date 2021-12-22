@@ -1,7 +1,7 @@
 connection_data = {
     "dbname": "nutrient",
     "user": "root", 
-    "password": "1234", 
+    "password": "01055646565", 
     "host": "localhost"
 }
 SECTION = 's1/d1'

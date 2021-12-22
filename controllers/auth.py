@@ -39,13 +39,13 @@ async def login(req: Request):
     is_verified = bcrypt.checkpw(pw.encode('utf-8'), db_user.password.encode('utf-8'))
     if not is_verified:
         return JSONResponse(status_code=400, content=dict(msg='NO_MATCH_USER'))
-    token = dict(email=email, authorization=f"Bearer {create_access_token(data=User.from_orm(db_user).dict(exclude={'password', 'createdAt'}))}")
+    token = dict(name=db_user.name, authorization=f"Bearer {create_access_token(data=User.from_orm(db_user).dict(exclude={'password', 'createdAt'}))}")
     return token
 
 async def email_exist(email: str):
-    get_email = read_users({"email__eq": email})
-    if len(get_email) > 0:
-        return get_email[0]
+    get_user = read_users({"email__eq": email})
+    if len(get_user) > 0:
+        return get_user[0]
     return False
 
 def create_access_token(*, data: dict = None, expires_delta: int = None):

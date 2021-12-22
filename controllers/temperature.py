@@ -6,6 +6,7 @@ from repository.temperature_repo import temperatureRepository
 
 @app.post("/temperature")
 async def read_temperature(req: Request):
+    print(await req.json())
     filters = await validate_filters(req=req)
     return temperatureRepository.read(filters)
 
