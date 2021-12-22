@@ -44,8 +44,8 @@ async def login(req: Request):
 
 async def email_exist(email: str):
     get_user = read_users({"email__eq": email})
-    if len(get_user) > 0:
-        return get_user[0]
+    if get_user:
+        return get_user
     return False
 
 def create_access_token(*, data: dict = None, expires_delta: int = None):

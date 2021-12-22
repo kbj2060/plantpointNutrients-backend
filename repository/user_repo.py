@@ -13,9 +13,9 @@ class UserRepository(BaseRepo):
         if filters is None:
             return None
         if "email__eq" in filters:
-            result_models = query.filter(models.User.email == filters["email__eq"]).all()
+            result_models = query.filter(models.User.email == filters["email__eq"]).first()
         if "name__eq" in filters:
-            result_models = query.filter(models.User.name == filters["name__eq"]).all()
+            result_models = query.filter(models.User.name == filters["name__eq"]).first()
         return self._model2entity(models=result_models, entity=eUser)
 
     def create(self, user: CreateUser) -> CreateUser:

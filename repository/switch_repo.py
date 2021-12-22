@@ -1,3 +1,4 @@
+from starlette.responses import JSONResponse
 from controllers.user import read_users
 from domain.entities.switch import Switch as eSwitch
 from domain.interfaces.RequestCreateSwitch import RequestCreateSwitch
@@ -21,15 +22,21 @@ class SwitchRepository(BaseRepo):
             sub = self.session.query(func.max(self.model.id).label('maxid')).group_by(self.model.machine_id).subquery('t2')
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
         elif filters.limit:
-            query = self.session.query(self.model, models.User.name, models.Machine.name).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit)
+            query = self.session.query(
+                self.model.status.label('status'),
+                self.model.createdAt.label('createdAt'),
+                models.User.name.label('username'),
+                models.Machine.name.label('machinename')
+            ).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit)
         elif filters.autoEachLast:
             sub = self.session.query(func.max(self.model.id).label('maxid')).filter(self.model.controlledBy_id == 1).group_by(self.model.machine_id).subquery('t2')
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
         return query.all()
         
     def create(self, data: RequestCreateSwitch) -> None:
-        user = read_users({"name__eq": data['controlledBy']})[0]
-        print(user)
+        if not data['controlledBy']: return
+        user = read_users({"name__eq": data['controlledBy']})
+        if not user: return
         new_switch = models.Switch(
             machine_id=data['machine_id'], 
             status=data['status'], 
@@ -37,6 +44,7 @@ class SwitchRepository(BaseRepo):
             )
         self.session.add(new_switch)
         self.session.commit()
+        return user.to_dict()
 
 
 switchRepository = SwitchRepository(connection_data)
