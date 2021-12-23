@@ -12,17 +12,16 @@ from config import JWT_ALGORITHM, JWT_SECRET
 @app.post("/register")
 async def register(req: Request):
     request = await req.json()
-    print(requests)
     reg_info = request['data']
-    is_exist = await email_exist(reg_info['email'])
+    db_user = await email_exist(reg_info['email'])
     if not (reg_info['email'] and reg_info['password']):
         return JSONResponse(status_code=400, content=dict(msg="Email and PW must be provided'"))
-    if is_exist:
+    if db_user:
         return JSONResponse(status_code=400, content=dict(msg="EMAIL_EXISTS"))
     hash_pw = bcrypt.hashpw(reg_info['password'].encode("utf-8"), bcrypt.gensalt())
     user_dict = dict(id=None, password= hash_pw, email=reg_info['email'], name=reg_info['name'], createdAt=None)
     new_user = await create_user({"data": user_dict})
-    token = dict(Authorization=f"Bearer {create_access_token(data=User.from_orm(new_user).dict(exclude={'password', 'createdAt'}))}")
+    token = dict(name=reg_info['name'], authorization=f"Bearer {create_access_token(data=User.from_orm(new_user).dict(exclude={'password', 'createdAt'}))}")
     return token
 
 
@@ -44,8 +43,7 @@ async def login(req: Request):
 
 async def email_exist(email: str):
     get_user = read_users({"email__eq": email})
-    if get_user:
-        return get_user
+    if get_user: return get_user
     return False
 
 def create_access_token(*, data: dict = None, expires_delta: int = None):
