@@ -68,7 +68,6 @@ class Machine(Base):
     createdAt = Column(DateTime, server_default=func.now())
 
     switches = relationship("Switch", backref ="machine")
-    report = relationship("Report", backref ="machine")
 
 '''
 CREATE TABLE sensor (
@@ -87,8 +86,6 @@ class Sensor(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(36))
     createdAt = Column(DateTime, server_default=func.now())
-  
-    report = relationship("Report", backref ="sensor")
 
 '''
 CREATE TABLE switch (
@@ -241,8 +238,7 @@ VALUES(1, 's1/d1', 3, 'temperature', '', false, now());
 class Report(Base):
     __tablename__ = "report"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    machine_id = Column(Integer, ForeignKey('machine.id'))
-    sensor_id = Column(Integer, ForeignKey('sensor.id'))
+    problem = Column(String(200))
     level = Column(Integer)
     isFixed = Column(Boolean, default=False)
     createdAt = Column(DateTime, server_default=func.now())

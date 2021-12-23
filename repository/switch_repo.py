@@ -1,6 +1,7 @@
 from starlette.responses import JSONResponse
 from controllers.user import read_users
 from domain.entities.switch import Switch as eSwitch
+from domain.entities.user import User
 from domain.interfaces.RequestCreateSwitch import RequestCreateSwitch
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.repo import BaseRepo
@@ -33,7 +34,7 @@ class SwitchRepository(BaseRepo):
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
         return query.all()
         
-    def create(self, data: RequestCreateSwitch) -> None:
+    def create(self, data: RequestCreateSwitch) -> User:
         if not data['controlledBy']: return
         user = read_users({"name__eq": data['controlledBy']})
         if not user: return

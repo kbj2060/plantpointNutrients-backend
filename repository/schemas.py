@@ -101,9 +101,8 @@ class NutrientSupply(BaseModel):
 
 class Report(BaseModel):
     id: int
-    level: str
-    machine_id: int
-    sensor_id: int
+    level: int
+    problem: str
     isFixed: bool
     createdAt: datetime
 

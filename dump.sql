@@ -68,22 +68,22 @@ CREATE TABLE IF NOT EXISTS `machine` (
   `name` varchar(45) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='					';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='					';
 
 -- 테이블 데이터 nutrient.machine:~10 rows (대략적) 내보내기
 DELETE FROM `machine`;
 /*!40000 ALTER TABLE `machine` DISABLE KEYS */;
 INSERT INTO `machine` (`id`, `name`, `createdAt`) VALUES
-	(1, 'waterspray', '2021-12-04 16:40:59'),
-	(2, 'valve_1', '2021-12-04 16:46:40'),
-	(3, 'valve_2', '2021-12-04 16:47:07'),
-	(4, 'valve_3', '2021-12-04 16:49:23'),
-	(5, 'waterpump', '2021-12-05 03:22:51'),
-	(6, 'led', '2021-12-05 03:59:25'),
-	(7, 'valve_in', '2021-12-06 06:38:18'),
-	(8, 'valve_out', '2021-12-14 10:29:04'),
-	(9, 'nutrientpump_A', '2021-12-14 10:29:50'),
-	(10, 'nutrientpump_B', '2021-12-14 10:30:03');
+	(1, 'valve_1', '2021-12-04 16:46:40'),
+	(2, 'valve_2', '2021-12-04 16:47:07'),
+	(3, 'valve_3', '2021-12-04 16:49:23'),
+	(4, 'waterpump_sprayer', '2021-12-05 03:22:51'),
+	(5, 'led', '2021-12-05 03:59:25'),
+	(6, 'valve_in', '2021-12-06 06:38:18'),
+	(7, 'valve_out', '2021-12-14 10:29:04'),
+	(8, 'waterpump_a', '2021-12-14 10:29:50'),
+	(9, 'waterpump_b', '2021-12-14 10:30:03'),
+	(10, 'waterpump_center', '2021-12-19 19:16:02');
 /*!40000 ALTER TABLE `machine` ENABLE KEYS */;
 
 -- 테이블 nutrient.nutrientsupply 구조 내보내기
@@ -92,34 +92,49 @@ CREATE TABLE IF NOT EXISTS `nutrientsupply` (
   `quantity` float DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.nutrientsupply:~1 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.nutrientsupply:~4 rows (대략적) 내보내기
 DELETE FROM `nutrientsupply`;
 /*!40000 ALTER TABLE `nutrientsupply` DISABLE KEYS */;
 INSERT INTO `nutrientsupply` (`id`, `quantity`, `createdAt`) VALUES
-	(1, 12, '2021-12-06 14:31:41');
+	(1, 12, '2021-12-06 14:31:41'),
+	(2, 12, '2021-12-16 00:41:43'),
+	(3, 19, '2021-12-16 00:44:40'),
+	(4, 30, '2021-12-16 00:57:01');
 /*!40000 ALTER TABLE `nutrientsupply` ENABLE KEYS */;
 
 -- 테이블 nutrient.report 구조 내보내기
 CREATE TABLE IF NOT EXISTS `report` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `machine_id` int DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `sensor_id` int DEFAULT NULL,
-  `isFixed` tinyint DEFAULT NULL,
+  `problem` longtext,
+  `isFixed` tinyint(1) unsigned zerofill DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.report:~4 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.report:~17 rows (대략적) 내보내기
 DELETE FROM `report`;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` (`id`, `machine_id`, `level`, `sensor_id`, `isFixed`, `createdAt`) VALUES
-	(1, 3, 3, NULL, 0, '2021-12-06 15:11:09'),
-	(2, 2, 2, NULL, 0, '2021-12-14 23:06:54'),
-	(3, NULL, 1, 2, 1, '2021-12-15 00:08:00'),
-	(4, 3, 1, NULL, 1, '2021-12-15 00:11:58');
+INSERT INTO `report` (`id`, `level`, `problem`, `isFixed`, `createdAt`) VALUES
+	(12, 3, 'Switch data related to machine data is not existed in AppDevices component.', 0, '2021-12-23 23:33:51'),
+	(13, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:16:30'),
+	(14, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:16:39'),
+	(15, 2, 'Machine or User data are not fit into switches data in History page.', 0, '2021-12-24 00:16:47'),
+	(16, 2, 'Machine or User data are not fit into switches data in History page.', 0, '2021-12-24 00:16:52'),
+	(17, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:16:55'),
+	(18, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:17:05'),
+	(19, 2, 'Machine or User data are not fit into switches data in History page.', 0, '2021-12-24 00:17:09'),
+	(20, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:17:15'),
+	(21, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:17:17'),
+	(22, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:21:38'),
+	(23, 2, 'Machine or User data are not fit into switches data in History page.', 0, '2021-12-24 00:21:40'),
+	(24, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:21:54'),
+	(25, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:22:17'),
+	(26, 2, 'Machine or User data are not fit into switches data in History page.', 0, '2021-12-24 00:22:23'),
+	(27, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:23:30'),
+	(28, 2, 'Machine or User data are not fit into switches data or switch history are less than 5 in AppTimeline page', 0, '2021-12-24 00:23:32');
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 
 -- 테이블 nutrient.section 구조 내보내기
@@ -131,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='		';
 
--- 테이블 데이터 nutrient.section:~3 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.section:~4 rows (대략적) 내보내기
 DELETE FROM `section`;
 /*!40000 ALTER TABLE `section` DISABLE KEYS */;
 INSERT INTO `section` (`id`, `main`, `sub`, `createdAt`) VALUES
@@ -165,9 +180,9 @@ CREATE TABLE IF NOT EXISTS `switch` (
   `controlledBy_id` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='		';
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='		';
 
--- 테이블 데이터 nutrient.switch:~76 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.switch:~104 rows (대략적) 내보내기
 DELETE FROM `switch`;
 /*!40000 ALTER TABLE `switch` DISABLE KEYS */;
 INSERT INTO `switch` (`id`, `machine_id`, `status`, `controlledBy_id`, `createdAt`) VALUES
@@ -197,7 +212,6 @@ INSERT INTO `switch` (`id`, `machine_id`, `status`, `controlledBy_id`, `createdA
 	(26, 2, 0, 1, '2021-12-14 19:16:38'),
 	(27, 3, 1, 1, '2021-12-14 19:56:46'),
 	(28, 2, 1, 1, '2021-12-14 19:56:47'),
-	(29, 4, 1, 1, '2021-12-14 19:56:48'),
 	(30, 6, 1, 1, '2021-12-14 19:56:49'),
 	(31, 10, 1, 1, '2021-12-14 19:56:54'),
 	(32, 8, 1, 1, '2021-12-14 19:56:54'),
@@ -207,22 +221,18 @@ INSERT INTO `switch` (`id`, `machine_id`, `status`, `controlledBy_id`, `createdA
 	(36, 2, 0, 1, '2021-12-14 19:57:06'),
 	(37, 1, 0, 1, '2021-12-14 19:57:07'),
 	(38, 3, 0, 1, '2021-12-14 19:57:07'),
-	(39, 4, 0, 1, '2021-12-14 19:57:08'),
 	(40, 5, 0, 1, '2021-12-14 20:14:41'),
 	(41, 7, 0, 1, '2021-12-14 20:14:41'),
 	(42, 9, 0, 1, '2021-12-14 20:14:42'),
 	(43, 1, 1, 1, '2021-12-14 21:27:11'),
-	(44, NULL, NULL, NULL, '2021-12-14 21:35:47'),
 	(45, 5, 1, 1, '2021-12-14 21:39:40'),
 	(46, 2, 1, 1, '2021-12-14 21:39:53'),
-	(47, 4, 1, 1, '2021-12-14 21:39:55'),
 	(48, 3, 1, 1, '2021-12-14 21:39:56'),
 	(49, 7, 1, 1, '2021-12-14 21:39:58'),
 	(50, 9, 1, 1, '2021-12-14 21:39:59'),
 	(51, 10, 0, 1, '2021-12-14 21:40:01'),
 	(52, 8, 0, 1, '2021-12-14 21:40:02'),
 	(53, 6, 0, 1, '2021-12-14 21:40:03'),
-	(54, 4, 0, 1, '2021-12-14 21:40:03'),
 	(55, 2, 0, 1, '2021-12-14 21:40:04'),
 	(56, 1, 0, 1, '2021-12-14 21:40:06'),
 	(57, 3, 0, 1, '2021-12-14 21:40:06'),
@@ -245,8 +255,41 @@ INSERT INTO `switch` (`id`, `machine_id`, `status`, `controlledBy_id`, `createdA
 	(74, 10, 1, 1, '2021-12-14 23:47:51'),
 	(75, 8, 1, 1, '2021-12-14 23:47:51'),
 	(76, 6, 1, 1, '2021-12-14 23:47:51'),
-	(77, 4, 1, 1, '2021-12-14 23:47:52'),
-	(78, 2, 1, 1, '2021-12-14 23:47:52');
+	(78, 2, 1, 1, '2021-12-14 23:47:52'),
+	(79, 1, 0, 1, '2021-12-16 00:57:39'),
+	(80, 3, 0, 1, '2021-12-16 00:57:39'),
+	(81, 5, 0, 1, '2021-12-16 00:57:39'),
+	(82, 10, 0, 1, '2021-12-18 11:58:11'),
+	(83, 10, 1, 1, '2021-12-18 11:58:27'),
+	(84, 10, 0, 1, '2021-12-18 12:00:21'),
+	(85, 10, 1, 1, '2021-12-21 23:29:19'),
+	(86, 5, 1, 1, '2021-12-21 23:29:20'),
+	(87, 3, 1, 1, '2021-12-21 23:29:20'),
+	(88, 1, 1, 1, '2021-12-21 23:29:21'),
+	(89, 7, 0, 1, '2021-12-23 00:26:46'),
+	(90, 7, 1, 1, '2021-12-23 00:27:27'),
+	(91, 3, 0, 1, '2021-12-23 00:27:43'),
+	(92, 7, 0, 1, '2021-12-23 00:28:08'),
+	(93, 7, 1, 1, '2021-12-23 00:28:49'),
+	(94, 3, 1, 1, '2021-12-23 00:29:08'),
+	(95, 7, 0, 1, '2021-12-23 00:29:41'),
+	(96, 7, 1, 1, '2021-12-23 00:30:12'),
+	(97, 5, 0, 1, '2021-12-23 00:48:49'),
+	(98, 3, 0, 1, '2021-12-23 00:48:50'),
+	(99, 1, 0, 1, '2021-12-23 00:48:50'),
+	(100, 7, 0, 1, '2021-12-23 00:48:51'),
+	(101, 9, 0, 1, '2021-12-23 00:48:51'),
+	(102, 10, 0, 1, '2021-12-23 00:48:52'),
+	(103, 8, 0, 1, '2021-12-23 00:48:53'),
+	(104, 6, 0, 1, '2021-12-23 00:48:53'),
+	(106, 2, 0, 1, '2021-12-23 00:48:54'),
+	(107, 3, 1, 1, '2021-12-23 00:50:16'),
+	(108, 1, 1, 1, '2021-12-23 00:50:17'),
+	(109, 1, 0, 1, '2021-12-23 23:10:43'),
+	(110, 3, 0, 1, '2021-12-23 23:10:44'),
+	(111, 9, 1, 1, '2021-12-23 23:11:01'),
+	(112, 10, 1, 1, '2021-12-23 23:11:02'),
+	(114, 4, 1, 1, '2021-12-23 23:39:40');
 /*!40000 ALTER TABLE `switch` ENABLE KEYS */;
 
 -- 테이블 nutrient.temperature 구조 내보내기
@@ -257,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `temperature` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.temperature:~72 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.temperature:~75 rows (대략적) 내보내기
 DELETE FROM `temperature`;
 /*!40000 ALTER TABLE `temperature` DISABLE KEYS */;
 INSERT INTO `temperature` (`id`, `value`, `createdAt`) VALUES
@@ -342,19 +385,17 @@ INSERT INTO `temperature` (`id`, `value`, `createdAt`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.user:~2 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.user:~1 rows (대략적) 내보내기
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `name`, `password`, `type`, `createdAt`) VALUES
-	(1, 'llewyn', 'temp', 'admin', '2021-12-06 06:45:48'),
-	(2, 'james', 'temp', 'admin', '2021-12-05 11:12:37'),
-	(3, 'john', 'temp', 'admin', '2021-12-05 11:26:13');
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `createdAt`) VALUES
+	(1, 'llewyn', 'kbj2060@naver.com', '$2b$12$uz89FGbxgG5RbAN3wFGzAuD1MpyNiULuQhdFuD0aeHJrfKDp2tltC', '2021-12-21 22:36:06');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- 테이블 nutrient.watercycle 구조 내보내기
@@ -363,28 +404,32 @@ CREATE TABLE IF NOT EXISTS `watercycle` (
   `period` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.watercycle:~0 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.watercycle:~2 rows (대략적) 내보내기
 DELETE FROM `watercycle`;
 /*!40000 ALTER TABLE `watercycle` DISABLE KEYS */;
+INSERT INTO `watercycle` (`id`, `period`, `createdAt`) VALUES
+	(1, 3, '2021-12-16 00:51:08'),
+	(2, 4, '2021-12-16 00:56:40');
 /*!40000 ALTER TABLE `watercycle` ENABLE KEYS */;
 
 -- 테이블 nutrient.waterspray 구조 내보내기
 CREATE TABLE IF NOT EXISTS `waterspray` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `operating_time` int DEFAULT NULL,
   `period` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.waterspray:~2 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.waterspray:~4 rows (대략적) 내보내기
 DELETE FROM `waterspray`;
 /*!40000 ALTER TABLE `waterspray` DISABLE KEYS */;
-INSERT INTO `waterspray` (`id`, `operating_time`, `period`, `createdAt`) VALUES
-	(1, NULL, 12, '2021-12-06 14:50:32'),
-	(2, 12, 12, '2021-12-06 14:51:06');
+INSERT INTO `waterspray` (`id`, `period`, `createdAt`) VALUES
+	(1, 12, '2021-12-06 14:50:32'),
+	(2, 12, '2021-12-06 14:51:06'),
+	(3, 15, '2021-12-16 00:44:35'),
+	(4, 10, '2021-12-16 00:56:55');
 /*!40000 ALTER TABLE `waterspray` ENABLE KEYS */;
 
 -- 테이블 nutrient.watersupply 구조 내보내기
@@ -393,13 +438,15 @@ CREATE TABLE IF NOT EXISTS `watersupply` (
   `quantity` float DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 테이블 데이터 nutrient.watersupply:~1 rows (대략적) 내보내기
+-- 테이블 데이터 nutrient.watersupply:~3 rows (대략적) 내보내기
 DELETE FROM `watersupply`;
 /*!40000 ALTER TABLE `watersupply` DISABLE KEYS */;
 INSERT INTO `watersupply` (`id`, `quantity`, `createdAt`) VALUES
-	(1, 12, '2021-12-06 14:22:19');
+	(1, 12, '2021-12-06 14:22:19'),
+	(2, 30, '2021-12-16 00:56:38'),
+	(3, 25, '2021-12-16 23:22:48');
 /*!40000 ALTER TABLE `watersupply` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
