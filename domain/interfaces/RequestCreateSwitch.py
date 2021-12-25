@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class RequestCreateSwitch(BaseModel):
-    status: Optional[bool]
-    machine_id: Optional[int]
-    controlledBy_id: Optional[int]
-    name: Optional[str]
+    status: bool
+    machine_id: int
+    controlledBy: str
+    name: str

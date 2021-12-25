@@ -177,8 +177,8 @@ CREATE TABLE watercycle (
 INSERT INTO watercycle(id, section_id, period, createdAt)
 VALUES(1, 's1/d1', 3, now());
 '''
-class WaterCycle(Base):
-    __tablename__ = "watercycle"
+class SprayTime(Base):
+    __tablename__ = "spraytime"
     id = Column(Integer, primary_key=True, autoincrement=True)
     period = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())
@@ -196,8 +196,8 @@ CREATE TABLE waterspray (
 INSERT INTO waterspray(id, section_id, operating_time, period, createdAt)
 VALUES(1, 's1/d1', 2, 3, now());
 '''
-class WaterSpray(Base):
-    __tablename__ = "waterspray"
+class SprayTerm(Base):
+    __tablename__ = "sprayterm"
     id = Column(Integer, primary_key=True, autoincrement=True)
     period = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())

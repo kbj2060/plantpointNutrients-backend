@@ -83,7 +83,7 @@ class WaterCycle(BaseModel):
         orm_mode = True
         arbitrary_types_allowed = True
 
-class WaterSpray(BaseModel):
+class SprayTerm(BaseModel):
     id: int
     period: int
     createdAt: datetime

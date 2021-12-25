@@ -30,10 +30,11 @@ class SwitchRepository(BaseRepo):
                 models.Machine.name.label('machinename')
             ).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit)
         elif filters.autoEachLast:
-            sub = self.session.query(func.max(self.model.id).label('maxid')).filter(self.model.controlledBy_id == 1).group_by(self.model.machine_id).subquery('t2')
+            sub = self.session.query(func.max(self.model.id).label('maxid'), models.User.name).join(models.User).filter(models.User.name == 'auto').group_by(self.model.machine_id).subquery('t2')
             query = self.session.query(self.model).join(sub, self.model.id == sub.c.maxid)
+            print(query.all())
         return query.all()
-        
+
     def create(self, data: RequestCreateSwitch) -> User:
         if not data['controlledBy']: return
         user = read_users({"name__eq": data['controlledBy']})

@@ -2,7 +2,7 @@ from typing import Dict, Optional
 from sqlalchemy.sql.sqltypes import DateTime
 
 
-class WaterSpray:
+class SprayTerm:
     def __init__(
         self,
         period: int,

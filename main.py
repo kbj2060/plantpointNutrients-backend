@@ -7,8 +7,8 @@ from controllers.switch import *
 from controllers.sensors import *
 from controllers.section import *
 from controllers.watersupply import *
-from controllers.watercycle import *
-from controllers.waterspray import *
+from controllers.spraytime import *
+from controllers.sprayterm import *
 from controllers.nutrientsupply import *
 from controllers.report import *
 from controllers.auth import *
