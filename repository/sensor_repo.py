@@ -12,17 +12,9 @@ class SensorRepository(BaseRepo):
         self.model = models.Sensor
         self.entity = eSensor
 
-    def read(self, filters: dict = None) -> List[eSensor]:
+    def read(self) -> List[eSensor]:
         query = self.session.query(models.Sensor)
-
-        if filters is None:
-            return self._model2entity(models=query.all(), entity=eSensor)
-        if "id__eq" in filters:
-            result_models = query.filter(models.Sensor.id == filters["id__eq"]).first()
-        if "name__eq" in filters:
-            result_models = query.filter(models.Sensor.name == filters["name__eq"]).first()
-
-        return self._model2entity(models=result_models, entity=eSensor)
+        return self._model2entity(models=query.all(), entity=eSensor)
 
     def create(self) -> None:
         new_sensor = models.Sensor(name='temp')

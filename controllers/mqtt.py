@@ -5,7 +5,7 @@ from fastapi_mqtt import FastMQTT, MQTTConfig
 from config import SECTION
 
 '''
-section/switch/waterpump
+s1/d1/switch/waterpump
 section/environment/temperature
 ,,,
 '''
@@ -27,6 +27,7 @@ def connect(client, flags, rc, properties):
 
 @mqtt.on_message()
 async def message(client, topic, payload, qos, properties):
+    # 같은 기기 내에서 온도 습도를 다루기 때문에 mqtt 없이 그냥 GPIO 라이브러리 사용할 것
     topic= topic.split('/')[-1]
     if topic == 'temperature':
         create_temperature(payload)

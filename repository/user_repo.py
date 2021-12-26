@@ -1,15 +1,15 @@
 from typing import List
 from domain.entities.user import User as eUser
 from domain.interfaces.CreateUser import CreateUser
+from domain.interfaces.ReadUser import ReadUser
 from repository.repo import BaseRepo
 from repository import models
 from config import connection_data
 
 
 class UserRepository(BaseRepo):
-    def read(self, filters: dict = None) -> List[eUser]:
+    def read(self, filters: ReadUser = None) -> List[eUser]:
         query = self.session.query(models.User)
-
         if filters is None:
             return None
         if "email__eq" in filters:

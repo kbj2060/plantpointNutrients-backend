@@ -3,8 +3,8 @@ from repository.sensor_repo import sensorRepository
 
 
 @app.get("/sensor")
-def read_sensors(filters: dict = None):
-    return sensorRepository.read(filters)
+def read_sensors():
+    return sensorRepository.read()
 
 @app.post("/sensor/create")
 def create_sensor():

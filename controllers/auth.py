@@ -2,6 +2,8 @@ import requests
 from datetime import datetime, timedelta
 from starlette.responses import JSONResponse
 from controllers.user import create_user, read_users
+from domain.interfaces.CreateUser import CreateUser
+from domain.interfaces.LoginUser import LoginUser
 from repository.schemas import User
 import bcrypt
 import jwt
@@ -12,7 +14,7 @@ from config import JWT_ALGORITHM, JWT_SECRET
 @app.post("/register")
 async def register(req: Request):
     request = await req.json()
-    reg_info = request['data']
+    reg_info: LoginUser = request['data']
     db_user = await email_exist(reg_info['email'])
     if not (reg_info['email'] and reg_info['password']):
         return JSONResponse(status_code=400, content=dict(msg="Email and PW must be provided'"))
@@ -28,8 +30,9 @@ async def register(req: Request):
 @app.post("/login")
 async def login(req: Request):
     request = await req.json()
-    email = request['data']['email']
-    pw = request['data']['password']
+    info: CreateUser = request['data']
+    email = info['email']
+    pw = info['password']
     db_user = await email_exist(email)
     if not email or not pw:
         return JSONResponse(status_code=400, content=dict(msg="Name and PW must be provided'"))

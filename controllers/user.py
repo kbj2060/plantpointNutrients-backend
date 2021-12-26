@@ -1,4 +1,3 @@
-from typing import Union
 from starlette.requests import Request
 from controllers.app import app
 from domain.interfaces.CreateUser import CreateUser
@@ -11,10 +10,6 @@ def read_users(req: Request):
 
 @app.post("/user/create")
 async def create_user(req):
-    if type(req) is dict:
-        requests = req['data']
-    else:
-        requests = (await req.json())['data']
-    print(requests)
+    requests = req['data'] if type(req) is dict else (await req.json())['data']
     user = CreateUser(**requests)
     return userRepository.create(user)
