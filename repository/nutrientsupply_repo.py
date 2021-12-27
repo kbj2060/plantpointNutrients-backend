@@ -1,8 +1,6 @@
-from typing import List
 from domain.entities.nutrientsupply import NutrientSupply as eNutrientSupply
 from repository.repo import BaseRepo
 from repository import models
-from sqlalchemy.orm import sessionmaker
 from config import connection_data
 
 
@@ -13,7 +11,7 @@ class NutrientSupplyRepository(BaseRepo):
         self.entity = eNutrientSupply
 
     def create(self, qauntity):
-        new_nutrientsupply = models.NutrientSupply(quantity=qauntity)
+        new_nutrientsupply: models.NutrientSupply = models.NutrientSupply(quantity=qauntity)
         self.session.add(new_nutrientsupply)
         self.session.commit()
 

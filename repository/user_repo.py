@@ -19,7 +19,7 @@ class UserRepository(BaseRepo):
         return self._model2entity(models=result_models, entity=eUser)
 
     def create(self, user: CreateUser) -> CreateUser:
-        new_user = models.User(
+        new_user: models.User = models.User(
             name=user.name, 
             email=user.email, 
             password=user.password

@@ -11,7 +11,7 @@ class ReportRepository(BaseRepo):
         self.entity = eReport
         
     def create(self, level: int, problem: str):
-        new_report = models.Report(problem=problem, level=level)
+        new_report: models.Report = models.Report(problem=problem, level=level)
         self.session.add(new_report)
         self.session.commit()
 

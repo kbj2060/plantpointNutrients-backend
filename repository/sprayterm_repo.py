@@ -12,7 +12,7 @@ class SprayTermRepository(BaseRepo):
         self.entity = eSprayTerm
 
     def create(self, period):
-        new_waterspray = models.SprayTerm(period=period)
+        new_waterspray: models.SprayTerm = models.SprayTerm(period=period)
         self.session.add(new_waterspray)
         self.session.commit()
 

@@ -11,7 +11,7 @@ class SprayTimeRepository(BaseRepo):
         self.entity = eSprayTime
 
     def create(self, period):
-        new_spraytime = models.SprayTime(period=period)
+        new_spraytime: models.SprayTime = models.SprayTime(period=period)
         self.session.add(new_spraytime)
         self.session.commit()
 

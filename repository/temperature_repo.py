@@ -18,7 +18,7 @@ class TemperatureRepository(BaseRepo):
         self.entity = eTemperature
 
     def create(self, value) -> None:
-        new_temperautre = self.model(value=int(value))
+        new_temperautre: models.Temperature = self.model(value=int(value))
         self.session.add(new_temperautre)
         self.session.commit()
 

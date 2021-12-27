@@ -1,4 +1,3 @@
-from sqlalchemy.sql.expression import and_
 from config import connection_data
 from repository.repo import BaseRepo
 from domain.entities.humidity import Humidity as eHumidity
@@ -11,7 +10,7 @@ class HumidityRepository(BaseRepo):
         self.model = models.Humidity
 
     def create(self, value) -> None:
-        new_humidity =self.model( value=int(value))
+        new_humidity: models.Humidity =self.model(value=int(value))
         self.session.add(new_humidity)
         self.session.commit()
 

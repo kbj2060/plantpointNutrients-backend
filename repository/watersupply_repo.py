@@ -11,7 +11,7 @@ class WaterSupplyRepository(BaseRepo):
         self.entity = eWaterSupply
 
     def create(self, quantity):
-        new_watersupply = models.WaterSupply(quantity=quantity)
+        new_watersupply: models.WaterSupply = models.WaterSupply(quantity=quantity)
         self.session.add(new_watersupply)
         self.session.commit()
 

@@ -3,7 +3,6 @@ from domain.entities.sensor import Sensor as eSensor
 from repository.repo import BaseRepo
 from repository import models
 from config import connection_data
-from utils.remove_sa_state import remove_sa_state
 
 
 class SensorRepository(BaseRepo):
@@ -17,7 +16,7 @@ class SensorRepository(BaseRepo):
         return self._model2entity(models=query.all(), entity=eSensor)
 
     def create(self) -> None:
-        new_sensor = models.Sensor(name='temp')
+        new_sensor: models.Sensor = models.Sensor(name='temp')
         self.session.add(new_sensor)
         self.session.commit()
 
