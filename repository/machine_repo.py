@@ -11,7 +11,7 @@ class MachineRepository(BaseRepo):
         return self._model2entity(models=query.all(), entity=eMachine)
 
     def create_machine(self) -> None:
-        new_machine: models.Machine = models.Machine(name='temp')
+        new_machine: models.Machine = models.Machine(name='temp', pin=2)
         self.session.add(new_machine)
         self.session.commit()
 

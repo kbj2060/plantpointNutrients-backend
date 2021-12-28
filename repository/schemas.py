@@ -30,6 +30,7 @@ class Section(BaseModel):
 class Machine(BaseModel):
     id: int
     name: str
+    pin: int
     createdAt: datetime
 
     class Config:

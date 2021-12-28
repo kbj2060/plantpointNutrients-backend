@@ -10,9 +10,16 @@ from datetime import datetime
 # 4. 양액공급용 워터펌프 2ea
 
 class Machine:
-    def __init__(self, name: str, id: Optional[int]= None, createdAt: Optional[DateTime]= None):
+    def __init__(
+        self,
+        name: str,
+        pin: int,
+        id: Optional[int]= None,
+        createdAt: Optional[DateTime]= None
+        ):
         self.id = id
         self.name = name
+        self.pin = pin
         self.createdAt = createdAt
     
     @classmethod
@@ -23,5 +30,6 @@ class Machine:
         return {
             "id": self.id,
             "name": self.name,
+            "pin": self.pin,
             "createdAt": self.createdAt
         }

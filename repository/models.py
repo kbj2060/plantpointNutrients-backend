@@ -64,6 +64,7 @@ VALUES(1, 'waterpump', 's1/d1', 'drain', now());
 class Machine(Base):
     __tablename__ = "machine"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    pin = Column(Integer)
     name = Column(String(36))
     createdAt = Column(DateTime, server_default=func.now())
 

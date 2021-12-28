@@ -38,8 +38,8 @@ class SwitchRepository(BaseRepo):
         user: eUser = read_users({"name__eq": data['controlledBy']})
         if not user: return
         new_switch: models.Switch = models.Switch(
-            machine_id=data['machine_id'], 
-            status=data['status'], 
+            machine_id=data['machine_id'],
+            status=data['status'],
             controlledBy_id=user.id
             )
         self.session.add(new_switch)
