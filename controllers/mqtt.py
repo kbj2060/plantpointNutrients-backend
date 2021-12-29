@@ -25,6 +25,10 @@ def connect(client, flags, rc, properties):
     mqtt.client.subscribe(f'{SECTION}/#')
     print("Connected: ", client, flags, rc, properties)
 
+@mqtt.on_disconnect()
+def disconnect(client, packet, exc=None):
+    print("Disconnected")
+    
 @mqtt.on_message()
 async def message(client, topic, payload, qos, properties):
     # 같은 기기 내에서 온도 습도를 다루기 때문에 mqtt 없이 그냥 GPIO 라이브러리 사용할 것
