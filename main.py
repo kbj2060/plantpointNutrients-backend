@@ -1,4 +1,4 @@
-from controllers.mqtt import *
+# from controllers.mqtt import *
 from controllers.machines import *
 from controllers.temperature import *
 from controllers.humidity import *
