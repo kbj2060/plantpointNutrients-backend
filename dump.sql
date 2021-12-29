@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `humidity` (
   `value` varchar(45) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.humidity:~31 rows (대략적) 내보내기
 DELETE FROM `humidity`;
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `machine` (
   `pin` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='					';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='					';
 
 -- 테이블 데이터 nutrient.machine:~10 rows (대략적) 내보내기
 DELETE FROM `machine`;
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `nutrientsupply` (
   `quantity` float DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.nutrientsupply:~9 rows (대략적) 내보내기
 DELETE FROM `nutrientsupply`;
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `report` (
   `isFixed` tinyint(1) unsigned zerofill DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.report:~11 rows (대략적) 내보내기
 DELETE FROM `report`;
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   `sub` varchar(45) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='		';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='		';
 
 -- 테이블 데이터 nutrient.section:~3 rows (대략적) 내보내기
 DELETE FROM `section`;
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `sensor` (
   `pin` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='	';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COMMENT='	';
 
 -- 테이블 데이터 nutrient.sensor:~3 rows (대략적) 내보내기
 DELETE FROM `sensor`;
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `sprayterm` (
   `period` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.sprayterm:~8 rows (대략적) 내보내기
 DELETE FROM `sprayterm`;
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `spraytime` (
   `period` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.spraytime:~8 rows (대략적) 내보내기
 DELETE FROM `spraytime`;
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `switch` (
   `controlledBy_id` int DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='		';
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COMMENT='		';
 
 -- 테이블 데이터 nutrient.switch:~109 rows (대략적) 내보내기
 DELETE FROM `switch`;
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `temperature` (
   `value` varchar(45) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.temperature:~70 rows (대략적) 내보내기
 DELETE FROM `temperature`;
@@ -448,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(100) DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.user:~3 rows (대략적) 내보내기
 DELETE FROM `user`;
@@ -465,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `watersupply` (
   `quantity` float DEFAULT NULL,
   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 nutrient.watersupply:~8 rows (대략적) 내보내기
 DELETE FROM `watersupply`;
