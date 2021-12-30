@@ -1,4 +1,3 @@
-import requests
 from datetime import datetime, timedelta
 from starlette.responses import JSONResponse
 from controllers.user import create_user, read_users
