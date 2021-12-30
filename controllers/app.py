@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import sqlalchemy
 from sqlalchemy.orm.session import sessionmaker
-import databases
 from config import connection_data
 from repository import models
 
@@ -36,7 +35,6 @@ fastapi.add_middleware(
 DATABASE_URL = "mysql+pymysql://{}:{}@{}/{}".format(
     connection_data["user"], connection_data["password"], connection_data["host"], connection_data["dbname"]
 )
-database = databases.Database(DATABASE_URL)
 engine = sqlalchemy.create_engine(
     DATABASE_URL
 )
@@ -44,13 +42,3 @@ models.Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = fastapi
-
-@app.on_event("startup")
-async def startup():
-    await database.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    print('Mysql disconnected')
-    await database.disconnect()
