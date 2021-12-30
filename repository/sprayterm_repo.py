@@ -1,19 +1,20 @@
-from typing import List
+from fastapi.params import Depends
+from sqlalchemy.orm.session import Session
 from domain.entities.sprayterm import SprayTerm as eSprayTerm
 from repository.repo import BaseRepo
 from repository import models
-from config import connection_data
+from utils.get_db import get_db
 
 
 class SprayTermRepository(BaseRepo):
-    def __init__(self, connection_data: dict) -> None:
-        super().__init__(connection_data)
+    def __init__(self) -> None:
+        super().__init__()
         self.model = models.SprayTerm
         self.entity = eSprayTerm
 
-    def create(self, period):
+    def create(self, period, db=next(get_db())):
         new_waterspray: models.SprayTerm = models.SprayTerm(period=period)
-        self.session.add(new_waterspray)
-        self.session.commit()
+        db.add(new_waterspray)
+        db.commit()
 
-sprayTermRepository = SprayTermRepository(connection_data)
+sprayTermRepository = SprayTermRepository()

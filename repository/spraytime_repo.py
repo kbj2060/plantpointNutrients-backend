@@ -1,18 +1,20 @@
+from fastapi.params import Depends
+from sqlalchemy.orm.session import Session
 from domain.entities.spraytime import SprayTime as eSprayTime
 from repository.repo import BaseRepo
 from repository import models
-from config import connection_data
+from utils.get_db import get_db
 
 
 class SprayTimeRepository(BaseRepo):
-    def __init__(self, connection_data: dict) -> None:
-        super().__init__(connection_data)
+    def __init__(self) -> None:
+        super().__init__()
         self.model = models.SprayTime
         self.entity = eSprayTime
 
-    def create(self, period):
+    def create(self, period, db=next(get_db())):
         new_spraytime: models.SprayTime = models.SprayTime(period=period)
-        self.session.add(new_spraytime)
-        self.session.commit()
+        db.add(new_spraytime)
+        db.commit()
 
-sprayTimeRepository = SprayTimeRepository(connection_data)
+sprayTimeRepository = SprayTimeRepository()

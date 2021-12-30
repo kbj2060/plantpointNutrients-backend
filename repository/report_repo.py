@@ -1,18 +1,18 @@
 from domain.entities.report import Report as eReport
 from repository.repo import BaseRepo
 from repository import models
-from config import connection_data
+from utils.get_db import get_db
 
 
 class ReportRepository(BaseRepo):
-    def __init__(self, connection_data: dict) -> None:
-        super().__init__(connection_data)
+    def __init__(self) -> None:
+        super().__init__()
         self.model = models.Report
         self.entity = eReport
         
-    def create(self, level: int, problem: str):
+    def create(self, level: int, problem: str, db=next(get_db())):
         new_report: models.Report = models.Report(problem=problem, level=level)
-        self.session.add(new_report)
-        self.session.commit()
+        db.add(new_report)
+        db.commit()
 
-reportRepository = ReportRepository(connection_data)
+reportRepository = ReportRepository()
