@@ -1,9 +1,7 @@
-from fastapi.params import Depends
-from sqlalchemy.orm.session import Session
 from domain.entities.watersupply import WaterSupply as eWaterSupply
 from repository.repo import BaseRepo
 from repository import models
-from utils.get_db import get_db
+from controllers.app import session
 
 
 class WaterSupplyRepository(BaseRepo):
@@ -12,9 +10,9 @@ class WaterSupplyRepository(BaseRepo):
         self.model = models.WaterSupply
         self.entity = eWaterSupply
 
-    def create(self, quantity, db=next(get_db())):
+    def create(self, quantity):
         new_watersupply: models.WaterSupply = models.WaterSupply(quantity=quantity)
-        db.add(new_watersupply)
-        db.commit()
+        session.add(new_watersupply)
+        session.commit()
 
 waterSupplyRepository = WaterSupplyRepository()

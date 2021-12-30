@@ -9,18 +9,6 @@ from repository import models
 from domain.request_objects import origin_request as req
 from domain.response_objects import origin_response as res
 
-DATABASE_URL = "mysql+pymysql://{}:{}@{}/{}".format(
-        connection_data["user"], connection_data["password"], connection_data["host"], connection_data["dbname"]
-    )
-# DATABASE_URL = "postgresql://user:password@postgresserver/db"
-
-database = databases.Database(DATABASE_URL)
-engine = sqlalchemy.create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
-models.Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 STATUS_CODES = {
     res.ResponseSuccess.SUCCESS: 200,
@@ -45,14 +33,24 @@ fastapi.add_middleware(
     allow_headers=["*"],
 )
 
+DATABASE_URL = "mysql+pymysql://{}:{}@{}/{}".format(
+    connection_data["user"], connection_data["password"], connection_data["host"], connection_data["dbname"]
+)
+database = databases.Database(DATABASE_URL)
+engine = sqlalchemy.create_engine(
+    DATABASE_URL
+)
+models.Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 app = fastapi
 
 @app.on_event("startup")
 async def startup():
-    print('connected')
     await database.connect()
 
 
 @app.on_event("shutdown")
 async def shutdown():
+    print('Mysql disconnected')
     await database.disconnect()

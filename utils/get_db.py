@@ -12,8 +12,6 @@ def get_db():
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     try:
-        print('DB opened!')
         yield session
     finally:
-        print('DB closed!')
         session.close()

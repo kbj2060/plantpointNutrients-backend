@@ -3,8 +3,7 @@ from sqlalchemy.orm.session import Session
 from domain.entities.nutrientsupply import NutrientSupply as eNutrientSupply
 from repository.repo import BaseRepo
 from repository import models
-from utils.get_db import get_db 
-
+from controllers.app import session
 
 class NutrientSupplyRepository(BaseRepo):
     def __init__(self) -> None:
@@ -12,9 +11,9 @@ class NutrientSupplyRepository(BaseRepo):
         self.model = models.NutrientSupply
         self.entity = eNutrientSupply
 
-    def create(self, qauntity, db=next(get_db())):
+    def create(self, qauntity):
         new_nutrientsupply: models.NutrientSupply = models.NutrientSupply(quantity=qauntity)
-        db.add(new_nutrientsupply)
-        db.commit()
+        session.add(new_nutrientsupply)
+        session.commit()
 
 nutrientSupplyRepository = NutrientSupplyRepository()

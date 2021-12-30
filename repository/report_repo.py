@@ -1,7 +1,7 @@
 from domain.entities.report import Report as eReport
 from repository.repo import BaseRepo
 from repository import models
-from utils.get_db import get_db
+from controllers.app import session
 
 
 class ReportRepository(BaseRepo):
@@ -10,9 +10,9 @@ class ReportRepository(BaseRepo):
         self.model = models.Report
         self.entity = eReport
         
-    def create(self, level: int, problem: str, db=next(get_db())):
+    def create(self, level: int, problem: str):
         new_report: models.Report = models.Report(problem=problem, level=level)
-        db.add(new_report)
-        db.commit()
+        session.add(new_report)
+        session.commit()
 
 reportRepository = ReportRepository()

@@ -1,12 +1,9 @@
 from typing import List
-from fastapi.params import Depends
-
-from sqlalchemy.orm.session import Session
 from domain.entities.section import Section as eSection
 from repository.repo import BaseRepo
 from repository import models
 
-from utils.get_db import get_db
+from controllers.app import session
 
 
 class SectionRepository(BaseRepo):
@@ -15,8 +12,8 @@ class SectionRepository(BaseRepo):
         self.model = models.Section
         self.entity = eSection
 
-    def read(self, db=next(get_db())) -> List[eSection]:
-        query = db.query(models.Section)
+    def read(self) -> List[eSection]:
+        query = session.query(models.Section)
         return self._model2entity(models=query.all(), entity=self.entity)
 
 

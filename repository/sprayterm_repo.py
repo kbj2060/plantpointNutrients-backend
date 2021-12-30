@@ -3,7 +3,7 @@ from sqlalchemy.orm.session import Session
 from domain.entities.sprayterm import SprayTerm as eSprayTerm
 from repository.repo import BaseRepo
 from repository import models
-from utils.get_db import get_db
+from controllers.app import session
 
 
 class SprayTermRepository(BaseRepo):
@@ -12,9 +12,9 @@ class SprayTermRepository(BaseRepo):
         self.model = models.SprayTerm
         self.entity = eSprayTerm
 
-    def create(self, period, db=next(get_db())):
+    def create(self, period):
         new_waterspray: models.SprayTerm = models.SprayTerm(period=period)
-        db.add(new_waterspray)
-        db.commit()
+        session.add(new_waterspray)
+        session.commit()
 
 sprayTermRepository = SprayTermRepository()

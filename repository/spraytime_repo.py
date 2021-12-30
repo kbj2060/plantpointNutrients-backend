@@ -1,9 +1,7 @@
-from fastapi.params import Depends
-from sqlalchemy.orm.session import Session
 from domain.entities.spraytime import SprayTime as eSprayTime
 from repository.repo import BaseRepo
 from repository import models
-from utils.get_db import get_db
+from controllers.app import session
 
 
 class SprayTimeRepository(BaseRepo):
@@ -12,9 +10,9 @@ class SprayTimeRepository(BaseRepo):
         self.model = models.SprayTime
         self.entity = eSprayTime
 
-    def create(self, period, db=next(get_db())):
+    def create(self, period):
         new_spraytime: models.SprayTime = models.SprayTime(period=period)
-        db.add(new_spraytime)
-        db.commit()
+        session.add(new_spraytime)
+        session.commit()
 
 sprayTimeRepository = SprayTimeRepository()
