@@ -25,7 +25,7 @@ origins = [
     "http://127.0.0.1",
     "http://127.0.0.1:8080",
     "http://127.0.0.1:3000",
-    "http://mudeulro29.iptime.org:3001"
+    "http://mudeulro29.iptime.org"
 ]
 
 
