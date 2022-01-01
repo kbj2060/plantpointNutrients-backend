@@ -86,6 +86,7 @@ class Sensor(Base):
     __tablename__ = "sensor"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(36))
+    pin = Column(Integer)
     createdAt = Column(DateTime, server_default=func.now())
 
 '''
