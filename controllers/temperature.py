@@ -1,6 +1,7 @@
 from fastapi import Request
 from controllers.app import app
 from controllers.utils import validate_filters
+from domain.interfaces.CreateEnvironment import CreateEnvironment
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.temperature_repo import temperatureRepository
 
@@ -11,5 +12,6 @@ async def read_temperature(req: Request):
     return temperatureRepository.read(filters)
 
 @app.post("/temperature/create")
-def create_temperature(value):
-    return temperatureRepository.create(value)
+async def create_temperature(req: Request):
+    data: CreateEnvironment = (await req.json())['data']
+    return temperatureRepository.create(data['value'])
