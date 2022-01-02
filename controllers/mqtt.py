@@ -30,7 +30,7 @@ def disconnect(client, packet, exc=None):
     print("Disconnected")
     
 @mqtt.on_message()
-def message(client, topic, payload, qos, properties):
+async def message(client, topic, payload, qos, properties):
     topic= topic.split('/')[-1]
     if topic == 'temperature':
         create_temperature(payload)
