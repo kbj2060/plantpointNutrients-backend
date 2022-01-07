@@ -7,6 +7,14 @@ from sqlalchemy.sql import func
 
 Base = declarative_base()
 
+class AutomationHistory(Base):
+    __tablename__ = "automation_history"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    subject= Column(String(36))
+    start = Column(DateTime)
+    end = Column(DateTime)
+    success = Column(Boolean)
+
 '''
 CREATE TABLE user (
  id        INT NOT NULL AUTO_INCREMENT,

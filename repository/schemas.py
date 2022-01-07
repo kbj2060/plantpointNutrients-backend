@@ -3,7 +3,14 @@ from datetime import datetime
 
 class Token(BaseModel):
     Authorization: str = None
-    
+
+class AutomationHistory(BaseModel):
+    id: int
+    subject: str
+    start: datetime
+    end: datetime
+    success: bool
+
 class User(BaseModel):
     id: int
     email: str
