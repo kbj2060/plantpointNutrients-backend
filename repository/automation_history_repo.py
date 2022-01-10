@@ -10,8 +10,8 @@ class AutomationHistoryRepository(BaseRepo):
         self.entity = eAutomationHistory
         self.model = models.AutomationHistory
 
-    def create(self, subject, start, end, success) -> None:
-        new_automation_history: models.AutomationHistory =self.model(subject=subject, start=start, end=end, success=success)
+    def create(self, subject, start, success) -> None:
+        new_automation_history: models.AutomationHistory =self.model(subject=subject, start=start, success=success)
         session.add(new_automation_history)
         session.commit()
 

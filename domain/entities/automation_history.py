@@ -14,14 +14,12 @@ class AutomationHistory:
         self,
         subject: str,
         start: DateTime,
-        end: DateTime,
         success: bool,
         id: Optional[int]= None
         ):
         self.id = id
         self.subject = subject
         self.start = start
-        self.end = end
         self.success = success
     
     @classmethod
@@ -33,6 +31,5 @@ class AutomationHistory:
             "id": self.id,
             "subject": self.subject,
             "start": self.start,
-            "end": self.end,
             "success": self.success
         }

@@ -12,7 +12,6 @@ class AutomationHistory(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     subject= Column(String(36))
     start = Column(DateTime)
-    end = Column(DateTime)
     success = Column(Boolean)
 
 '''
