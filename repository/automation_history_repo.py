@@ -17,8 +17,8 @@ class AutomationHistoryRepository(BaseRepo):
             result_models = query.filter(self.model.subject == filters["subject__eq"]).order_by(self.model.id.desc()).limit(1)
             return self._model2entity(models=result_models.first(), entity=self.entity)
             
-    def create(self, subject, start, isCompledted) -> None:
-        new_automation_history: models.AutomationHistory =self.model(subject=subject, start=start, isCompledted=isCompledted)
+    def create(self, subject, start, isCompleted) -> None:
+        new_automation_history: models.AutomationHistory =self.model(subject=subject, start=start, isCompleted=isCompleted)
         session.add(new_automation_history)
         session.commit()
 

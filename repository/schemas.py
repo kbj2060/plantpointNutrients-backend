@@ -8,7 +8,7 @@ class AutomationHistory(BaseModel):
     id: int
     subject: str
     start: datetime
-    isCompledted: bool
+    isCompleted: bool
 
 class User(BaseModel):
     id: int
