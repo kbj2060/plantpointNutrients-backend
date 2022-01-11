@@ -14,13 +14,13 @@ class AutomationHistory:
         self,
         subject: str,
         start: DateTime,
-        success: bool,
+        isCompledted: bool,
         id: Optional[int]= None
         ):
         self.id = id
         self.subject = subject
         self.start = start
-        self.success = success
+        self.isCompledted = isCompledted
     
     @classmethod
     def from_dict(cls, adict: Dict) -> object:
@@ -31,5 +31,5 @@ class AutomationHistory:
             "id": self.id,
             "subject": self.subject,
             "start": self.start,
-            "success": self.success
+            "isCompledted": self.isCompledted
         }
