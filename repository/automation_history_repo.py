@@ -14,7 +14,7 @@ class AutomationHistoryRepository(BaseRepo):
         query = session.query(self.model)
         print(filters)
         if "subject__eq" in filters:
-            result_models = query.filter(self.model.subject == filters["subject__eq"]).order_by(self.model.id.desc()).limit(1)
+            result_models = query.filter(self.model.subject == filters["subject__eq"], self.model.isCompleted == False).order_by(self.model.id.desc()).limit(1)
             return self._model2entity(models=result_models.first(), entity=self.entity)
             
     def create(self, subject, start, isCompleted) -> None:
