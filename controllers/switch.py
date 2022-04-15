@@ -9,7 +9,7 @@ from domain.interfaces.RequestFilters import RequestFilters
 from repository.switch_repo import switchRepository
 
 
-@app.post("/switch", response_model=List[SwitchItem])
+@app.post("/switch")
 async def read_switches(req: Request):
     filters: RequestFilters = await validate_filters(req=req)
     return switchRepository.read(filters)
