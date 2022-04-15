@@ -1,20 +1,13 @@
 from typing import List
+from domain.response_objects.origin_response import SwitchItem
 from pydantic import BaseModel
-from datetime import datetime
 from starlette.requests import Request
 from controllers.app import app
 from controllers.utils import validate_filters
 from domain.interfaces.RequestCreateSwitch import RequestCreateSwitch
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.switch_repo import switchRepository
-# from controllers.mqtt import mqtt
-# from config import SECTION
 
-class SwitchItem(BaseModel):
-    status: bool
-    createdAt: datetime
-    username: str
-    machinename: str
 
 @app.post("/switch", response_model=List[SwitchItem])
 async def read_switches(req: Request):

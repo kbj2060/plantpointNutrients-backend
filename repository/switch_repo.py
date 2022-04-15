@@ -21,22 +21,21 @@ class SwitchRepository(BaseRepo):
         elif filters.eachLast:
             sub = session.query(func.max(self.model.id).label('maxid')).group_by(self.model.machine_id).subquery('t2')
             query = session.query(self.model).join(sub, self.model.id == sub.c.maxid)
+            return query.all()
         elif filters.limit:
             query = session.query(
                 self.model.status.label('status'),
                 self.model.createdAt.label('createdAt'),
                 models.User.name.label('username'),
                 models.Machine.name.label('machinename')
-            ).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit).with_entities(
-                self.model.status.label('status'),
-                self.model.createdAt.label('createdAt'),
-                models.User.name.label('username'),
-                models.Machine.name.label('machinename')
-            )
+            ).join(models.User, models.Machine).order_by(self.model.id.desc()).limit(filters.limit)
+            return [u._asdict() for u in query.all()]
         elif filters.autoEachLast:
             sub = session.query(func.max(self.model.id).label('maxid'), models.User.name).join(models.User).filter(models.User.name == 'auto').group_by(self.model.machine_id).subquery('t2')
             query = session.query(self.model).join(sub, self.model.id == sub.c.maxid)
-        return query.all()
+            return query.all()
+        else:
+            return None
 
     def create(self, data: RequestCreateSwitch) -> eUser:
         if not data['controlledBy']: return

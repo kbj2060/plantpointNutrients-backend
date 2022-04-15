@@ -1,4 +1,6 @@
+from datetime import datetime
 from domain.request_objects.origin_request import InvalidRequestObject
+from pydantic import BaseModel
 
 
 class ResponseFailure:
@@ -52,3 +54,9 @@ class ResponseSuccess:
 
     def __bool__(self) -> bool:
         return True
+
+class SwitchItem(BaseModel):
+    status: bool
+    createdAt: datetime
+    username: str
+    machinename: str
