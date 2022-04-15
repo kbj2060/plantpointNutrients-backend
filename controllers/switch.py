@@ -1,3 +1,6 @@
+from typing import List
+from pydantic import BaseModel
+from datetime import datetime
 from starlette.requests import Request
 from controllers.app import app
 from controllers.utils import validate_filters
@@ -7,7 +10,13 @@ from repository.switch_repo import switchRepository
 # from controllers.mqtt import mqtt
 # from config import SECTION
 
-@app.post("/switch")
+class SwitchItem(BaseModel):
+    status: bool
+    createdAt: datetime
+    username: str
+    machinename: str
+
+@app.post("/switch", response_model=List[SwitchItem])
 async def read_switches(req: Request):
     filters: RequestFilters = await validate_filters(req=req)
     return switchRepository.read(filters)
