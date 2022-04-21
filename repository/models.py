@@ -14,6 +14,32 @@ class AutomationHistory(Base):
     start = Column(DateTime)
     isCompleted = Column(Boolean)
 
+class AutomationAC(Base):
+    __tablename__ = "automation_ac"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    end= Column(String(36))
+    start = Column(String(36))
+    createdAt = Column(DateTime)
+
+class AutomationLed(Base):
+    __tablename__ = "automation_led"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    end= Column(String(36))
+    start = Column(String(36))
+    createdAt = Column(DateTime)
+
+class AutomationFan(Base):
+    __tablename__ = "automation_fan"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    term= Column(Integer)
+    createdAt = Column(DateTime)
+
+class AutomationRoofFan(Base):
+    __tablename__ = "automation_rooffan"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    term= Column(Integer)
+    createdAt = Column(DateTime)
+
 '''
 CREATE TABLE user (
  id        INT NOT NULL AUTO_INCREMENT,

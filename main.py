@@ -12,4 +12,4 @@ from controllers.sprayterm import *
 from controllers.nutrientsupply import *
 from controllers.report import *
 from controllers.auth import *
-from controllers.automation_history import *
+from controllers.automation import *
