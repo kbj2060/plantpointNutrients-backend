@@ -19,6 +19,7 @@ class AutomationAC(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     end= Column(String(36))
     start = Column(String(36))
+    active = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 
 class AutomationLed(Base):
@@ -26,18 +27,21 @@ class AutomationLed(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     end= Column(String(36))
     start = Column(String(36))
+    active = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 
 class AutomationFan(Base):
     __tablename__ = "automation_fan"
     id = Column(Integer, primary_key=True, autoincrement=True)
     term= Column(Integer)
+    active = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 
 class AutomationRoofFan(Base):
     __tablename__ = "automation_rooffan"
     id = Column(Integer, primary_key=True, autoincrement=True)
     term= Column(Integer)
+    active = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 
 '''

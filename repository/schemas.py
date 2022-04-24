@@ -7,8 +7,34 @@ class Token(BaseModel):
 class AutomationHistory(BaseModel):
     id: int
     subject: str
-    start: datetime
+    createdAt: datetime
     isCompleted: bool
+
+class AutomationLed(BaseModel):
+    id: int
+    start: datetime
+    end: datetime
+    active: bool
+    createdAt: datetime
+
+class AutomationFan(BaseModel):
+    id: int
+    term: int
+    active: bool
+    createdAt: datetime
+
+class AutomationRoofFan(BaseModel):
+    id: int
+    term: int
+    active: bool
+    createdAt: datetime
+
+class AutomationAC(BaseModel):
+    id: int
+    start: int
+    end: int
+    active: bool
+    createdAt: datetime
 
 class User(BaseModel):
     id: int

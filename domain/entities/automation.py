@@ -8,13 +8,13 @@ class AutomationHistory:
     def __init__(
         self,
         subject: str,
-        start: DateTime,
+        createdAt: datetime,
         isCompleted: bool,
         id: Optional[int]= None
         ):
         self.id = id
         self.subject = subject
-        self.start = start
+        self.createdAt = createdAt
         self.isCompleted = isCompleted
     
     @classmethod
@@ -25,7 +25,7 @@ class AutomationHistory:
         return {
             "id": self.id,
             "subject": self.subject,
-            "start": self.start,
+            "createdAt": self.createdAt,
             "isCompleted": self.isCompleted
         }
 
@@ -33,13 +33,15 @@ class AutomationLed:
     def __init__(
         self,
         end: str,
-        start: DateTime,
+        start: datetime,
         createdAt: datetime,
+        active: bool,
         id: Optional[int]= None
         ):
         self.id = id
         self.end = end
         self.start = start
+        self.active = active
         self.createdAt = createdAt
     
     @classmethod
@@ -51,6 +53,7 @@ class AutomationLed:
             "id": self.id,
             "end": self.end,
             "start": self.start,
+            "active": self.active,
             "createdAt": self.createdAt
         }
 
@@ -59,10 +62,12 @@ class AutomationRoofFan:
         self,
         term: int,
         createdAt: datetime,
+        active: bool,
         id: Optional[int]= None
         ):
         self.id = id
         self.term = term
+        self.active = active
         self.createdAt = createdAt
     
     @classmethod
@@ -73,6 +78,7 @@ class AutomationRoofFan:
         return {
             "id": self.id,
             "term": self.term,
+            "active": self.active,
             "createdAt": self.createdAt
         }
 
@@ -80,11 +86,13 @@ class AutomationFan:
     def __init__(
         self,
         term: int,
+        active: bool,
         createdAt: datetime,
         id: Optional[int]= None
         ):
         self.id = id
         self.term = term
+        self.active = active
         self.createdAt = createdAt
     
     @classmethod
@@ -95,20 +103,23 @@ class AutomationFan:
         return {
             "id": self.id,
             "term": self.term,
+            "active": self.active,
             "createdAt": self.createdAt
         }
 
 class AutomationAC:
     def __init__(
         self,
-        end: str,
-        start: DateTime,
+        end: datetime,
+        start: datetime,
+        active: bool,
         createdAt: datetime,
         id: Optional[int]= None
         ):
         self.id = id
         self.end = end
         self.start = start
+        self.active = active
         self.createdAt = createdAt
     
     @classmethod
@@ -120,5 +131,6 @@ class AutomationAC:
             "id": self.id,
             "end": self.end,
             "start": self.start,
+            "active": self.active,
             "createdAt": self.createdAt
         }
