@@ -12,8 +12,8 @@ class AutomationHistory(BaseModel):
 
 class AutomationLed(BaseModel):
     id: int
-    start: datetime
-    end: datetime
+    start: str
+    end: str
     active: bool
     createdAt: datetime
 

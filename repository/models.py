@@ -17,8 +17,8 @@ class AutomationHistory(Base):
 class AutomationAC(Base):
     __tablename__ = "automation_ac"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    end= Column(String(36))
-    start = Column(String(36))
+    end= Column(Float)
+    start = Column(Float)
     active = Column(Boolean)
     createdAt = Column(DateTime, server_default=func.now())
 

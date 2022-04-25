@@ -33,7 +33,7 @@ class AutomationLed:
     def __init__(
         self,
         end: str,
-        start: datetime,
+        start: str,
         createdAt: datetime,
         active: bool,
         id: Optional[int]= None
