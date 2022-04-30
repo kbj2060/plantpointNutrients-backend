@@ -4,12 +4,6 @@ from controllers.temperature import create_temperature
 from fastapi_mqtt import FastMQTT, MQTTConfig
 from config import SECTION
 
-'''
-s1/d1/switch/waterpump
-section/environment/temperature
-,,,
-'''
-
 mqtt_config = MQTTConfig(
     host = "localhost",
     port= 1883,
