@@ -1,5 +1,4 @@
 from typing import Dict, Optional
-
 from sqlalchemy.sql.sqltypes import DateTime
 
 class Report:

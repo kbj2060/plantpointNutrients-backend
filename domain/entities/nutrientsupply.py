@@ -1,5 +1,3 @@
-from typing import Dict, Optional
-
 from domain.entities.watersupply import WaterSupply
 
 class NutrientSupply(WaterSupply):

@@ -1,7 +1,4 @@
 from typing import  Optional, Dict
-
-from sqlalchemy.sql.sqltypes import DateTime
-from repository.models import Section
 from datetime import datetime
 
 class AutomationHistory:

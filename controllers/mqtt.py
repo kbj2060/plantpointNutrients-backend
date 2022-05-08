@@ -6,9 +6,7 @@ from config import MQTT_CONFIG, SECTION
 
 mqtt_config = MQTTConfig(**MQTT_CONFIG)
 
-mqtt = FastMQTT(
-    config=mqtt_config
-    )
+mqtt = FastMQTT(config=mqtt_config)
 mqtt.init_app(app)
 
 @mqtt.on_connect()
