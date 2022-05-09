@@ -89,6 +89,7 @@ class AutomationLedRepository(BaseRepo):
         session.add(new_automation)
         session.commit()
 
+        
 automationHistoryRepository = AutomationHistoryRepository()
 automationACRepository = AutomationACRepository()
 automationFanRepository = AutomationFanRepository()
