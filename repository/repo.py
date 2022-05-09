@@ -1,5 +1,5 @@
 from datetime import date
-from sqlalchemy import Date, cast
+from sqlalchemy import Date, cast, func
 from domain.interfaces.RequestFilters import RequestFilters
 from utils.remove_sa_state import remove_sa_state
 from controllers.app import session
@@ -16,7 +16,7 @@ class BaseRepo:
 
     def _handle_filters(self, filters: RequestFilters):
         if filters.today:
-            return session.query(self.model).filter(cast(self.model.createdAt, Date) == date.today())
+            return session.query(self.model).filter(func.date(self.model.createdAt) == date.today())
         elif filters.limit > 0:
             return session.query(self.model).order_by(self.model.id.desc()).limit(filters.limit)
     

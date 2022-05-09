@@ -1,8 +1,5 @@
 from typing import  Optional, Dict
-
 from sqlalchemy.sql.sqltypes import DateTime
-from repository.models import Section
-from datetime import datetime
 # 기계
 # 1. 솔레노이드 밸브 5ea
 # 2. 물공급용 워터펌프

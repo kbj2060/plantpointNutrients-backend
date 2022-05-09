@@ -3,7 +3,6 @@ from controllers.utils import validate_filters
 from domain.interfaces.RequestFilters import RequestFilters
 from repository.nutrientsupply_repo import nutrientSupplyRepository
 from fastapi import Request
-import json
 
 
 @app.post("/nutrientsupply")

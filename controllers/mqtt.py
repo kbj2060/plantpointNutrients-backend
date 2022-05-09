@@ -2,16 +2,11 @@ from controllers.app import app
 from controllers.humidity import create_humidity
 from controllers.temperature import create_temperature
 from fastapi_mqtt import FastMQTT, MQTTConfig
-from config import SECTION
+from config import MQTT_CONFIG, SECTION
 
-mqtt_config = MQTTConfig(
-    host = "localhost",
-    port= 1883,
-    keepalive = 60
-)
-mqtt = FastMQTT(
-    config=mqtt_config
-    )
+mqtt_config = MQTTConfig(**MQTT_CONFIG)
+
+mqtt = FastMQTT(config=mqtt_config)
 mqtt.init_app(app)
 
 @mqtt.on_connect()
